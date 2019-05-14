@@ -1,0 +1,12 @@
+## GRADLE
+.gradle
+build
+
+# IntelliJ
+.idea
+
+
+bin/
+.settings
+.project
+.classpath

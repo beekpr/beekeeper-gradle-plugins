@@ -1,0 +1,3 @@
+rootProject.name = 'beekeeper-gradle-plugin'
+
+include ':beekeeper-formatter-plugin'

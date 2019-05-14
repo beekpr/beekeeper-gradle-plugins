@@ -1,0 +1,49 @@
+plugins {
+    id 'groovy'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+    id 'com.gradle.plugin-publish'
+}
+
+gradlePlugin {
+    plugins {
+        formatterPlugin {
+            id = "${group}"
+            implementationClass = 'io.beekeeper.gradle.plugin.BeekeeperGradlePlugin'
+            displayName = 'Beekeeper Gradle Plugin'
+            description = 'A plugin that runs a set of utility plugins used at beekeeper'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation project(':beekeeper-formatter-plugin')
+}
+
+// MAVEN PACKAGE PUBLISHING
+publishing {
+    repositories {
+        mavenLocal()
+    }
+    publications {
+        maven(MavenPublication) {
+            groupId "${group}"
+            artifactId "${artifactId}"
+            version "${version}"
+
+            from components.java
+        }
+    }
+}
+
+// GRADLE PLUGIN PUBLISHING
+//pluginBundle {
+//    //TODO: vcsUrl = '<uri to project source repository>'
+//    tags = ['gradle', 'plugin', 'beekeeper']
+//}
+
