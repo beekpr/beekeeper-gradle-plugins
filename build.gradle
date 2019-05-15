@@ -1,32 +1,27 @@
 plugins {
-    id 'groovy'
-    id 'java-gradle-plugin'
-    id 'com.gradle.plugin-publish'
+    // eat our own dogfood and apply groovy code style via spotless
+    id "com.diffplug.gradle.spotless" version "3.23.0"
+    id "com.gradle.plugin-publish" version "0.10.1"
 }
 
-gradlePlugin {
-    plugins {
-        formatterPlugin {
-            id = "${group}"
-            implementationClass = 'io.beekeeper.gradle.plugin.BeekeeperGradlePlugin'
-            displayName = 'Beekeeper Gradle Plugin'
-            description = 'A plugin that runs a set of utility plugins used at beekeeper'
+subprojects {
+    apply plugin: 'groovy'
+    apply plugin: 'java-gradle-plugin'
+    apply plugin: 'com.gradle.plugin-publish'
+    apply plugin: 'com.diffplug.gradle.spotless'
+
+    spotless {
+        groovy {
+            greclipse()
         }
     }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation localGroovy()
+        testImplementation "org.spockframework:spock-core:1.2-groovy-2.5"
+    }
 }
-
-repositories {
-    mavenCentral()
-}
-
-
-dependencies {
-    implementation project(':beekeeper-formatter-plugin')
-}
-
-// GRADLE PLUGIN PUBLISHING
-pluginBundle {
-    vcsUrl = 'https://github.com/beekpr/beekeeper-gradle-plugin'
-    tags = ['gradle', 'plugin', 'beekeeper']
-}
-

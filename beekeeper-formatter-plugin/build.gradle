@@ -1,36 +1,18 @@
-plugins {
-    id 'groovy'
-    id 'java-gradle-plugin'
-    id 'com.gradle.plugin-publish'
-}
-
 gradlePlugin {
     plugins {
         formatterPlugin {
-            id = "${group}"
+            id = 'io.beekeeper.formatting'
             implementationClass = 'io.beekeeper.formatting.FormatterPlugin'
-            displayName = 'Beekeeper Formatter Plugin'
-            description = 'A plugin that helps keeping the code of your project clean and well formatted.'
         }
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
-
 dependencies {
     implementation group: 'com.diffplug.spotless', name: 'spotless-plugin-gradle', version: '3.17.0'
-    testImplementation "org.spockframework:spock-core:1.2-groovy-2.5"
 }
 
-// Include Resources in the jar
-sourceSets.main.resources.srcDirs += "src/main/resources"
-sourceSets.main.resources.srcDirs += "${project.rootDir}/coding-guidelines/"
-
-// GRADLE PLUGIN PUBLISHING
 pluginBundle {
-    vcsUrl = 'https://github.com/beekpr/beekeeper-gradle-plugin/tree/master/beekeeper-formatter-plugin'
-    tags = ['format', 'clean', 'indent', 'spotless', 'beekeeper']
+    vcsUrl = 'git@github.com:beekpr/beekeeper-gradle-plugins.git'
+    tags = ['formatting', 'beekeeper']
+    website = 'https://github.com/beekpr/beekeeper-gradle-plugins/README.md'
 }

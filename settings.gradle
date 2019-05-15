@@ -1,3 +1,4 @@
-rootProject.name = 'beekeeper-gradle-plugin'
+rootProject.name = 'beekeeper-gradle-plugins'
 
 include ':beekeeper-formatter-plugin'
+include ':beekeeper-plugin'
