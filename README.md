@@ -9,7 +9,7 @@ Plugins applied:
 
 ## Disclaimer
 
-**The repository is public** and is not meant for containing credentials or other sensible information.
+**The repository is public** and is not meant for containing _credentials or other sensitive_ information.
 
 ## License
 > Copyright 2019 Beekeeper
