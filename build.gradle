@@ -24,4 +24,9 @@ subprojects {
         implementation localGroovy()
         testImplementation "org.spockframework:spock-core:1.2-groovy-2.5"
     }
+    
+    task publish {
+    }
+    
+    publish.dependsOn('publishPlugins')
 }
