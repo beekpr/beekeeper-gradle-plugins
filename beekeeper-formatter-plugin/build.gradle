@@ -1,18 +1,27 @@
+dependencies {
+    implementation group: 'com.diffplug.spotless', name: 'spotless-plugin-gradle', version: '3.17.0'
+}
+
 gradlePlugin {
     plugins {
         formatterPlugin {
-            id = 'io.beekeeper.formatting'
+            id = 'io.beekeeper.gradle.plugins.formatting'
             implementationClass = 'io.beekeeper.formatting.FormatterPlugin'
         }
     }
 }
 
-dependencies {
-    implementation group: 'com.diffplug.spotless', name: 'spotless-plugin-gradle', version: '3.17.0'
-}
-
 pluginBundle {
-    vcsUrl = 'git@github.com:beekpr/beekeeper-gradle-plugins.git'
+    vcsUrl = 'https://github.com/beekpr/beekeeper-gradle-plugins/'
     tags = ['formatting', 'beekeeper']
-    website = 'https://github.com/beekpr/beekeeper-gradle-plugins/README.md'
+    website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+    
+    plugins {
+		formatterPlugin {
+			id = 'io.beekeeper.gradle.plugins.formatting'
+			displayName = 'Beekeeper Formatting Plugin'
+			description = 'Formatting java projects with beekeepers formatting rules easily.'
+			website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+		}
+	}
 }
