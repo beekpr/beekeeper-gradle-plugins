@@ -11,6 +11,7 @@ gradlePlugin {
 
 dependencies {
     implementation project(':beekeeper-formatter-plugin')
+    implementation 'org.owasp:dependency-check-gradle:5.0.0-M3.1'
 }
 
 pluginBundle {
