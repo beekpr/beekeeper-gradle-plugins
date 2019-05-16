@@ -1,15 +1,24 @@
-# Beekeeper Gradle Plugin
+# Beekeeper Gradle Plugins
 
-A plugin that runs a set of other  utility plugins used in beekeeper's projects.
+A set of plugins used in beekeeper's projects.
 
-Plugins applied:
-* [beekeeper-formatter-plugin](beekeeper-formatter-plugin/README.md): Format and clean your project
-* [Dependency-check-plugin](https://github.com/jeremylong/dependency-check-gradle): check if your project contains vulnerable dependencies.
+
+## Included Plugins
+
+### `io.beekeeper.gradle`
+
+Convention plugin for which plugins to apply.
+
+### `io.beekeeper.formatting`
+
+Formatting conventions for the following languages with `spotless`:
+
+- `java`
 
 
 ## Disclaimer
 
-**The repository is public** and is not meant for containing credentials or other sensible information.
+**The repository is public** and is not meant for containing credentials or other sensitive information.
 
 ## License
 > Copyright 2019 Beekeeper

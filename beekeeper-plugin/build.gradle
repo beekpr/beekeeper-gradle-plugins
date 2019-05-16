@@ -1,20 +1,27 @@
-gradlePlugin {
-    plugins {
-        formatterPlugin {
-            id = 'io.beekeeper.gradle'
-            implementationClass = 'io.beekeeper.gradle.plugin.BeekeeperPlugin'
-            displayName = 'Beekeeper Gradle Plugin'
-            description = 'A plugin that runs a set of utility plugins used at beekeeper'
-        }
-    }
-}
-
 dependencies {
     implementation project(':beekeeper-formatter-plugin')
     implementation 'org.owasp:dependency-check-gradle:5.0.0-M3.1'
 }
 
+gradlePlugin {
+    plugins {
+        beekeeperPlugin {
+            id = 'io.beekeeper.gradle.plugin'
+			implementationClass = 'io.beekeeper.gradle.plugin.BeekeeperPlugin'
+        }
+    }
+}
+
 pluginBundle {
     vcsUrl = 'https://github.com/beekpr/beekeeper-gradle-plugin'
-    tags = ['convetion', 'beekeeper']
+    tags = ['convention', 'beekeeper']
+    
+    plugins {
+        beekeeperPlugin {
+            id = 'io.beekeeper.gradle.plugin'
+            displayName = 'Beekeeper Gradle Plugin'
+            description = 'A plugin that runs a set of utility plugins used at beekeeper'
+            website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+        }
+    }
 }
