@@ -1,4 +1,4 @@
-package io.beekeeper.formatting
+package io.beekeeper.formatter
 
 import com.diffplug.common.io.Resources
 import com.diffplug.gradle.spotless.SpotlessPlugin
@@ -12,7 +12,7 @@ import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 
 class FormatterPlugin implements Plugin<Project> {
-	static final String IDENTIFIER = 'io.beekeeper.formatting'
+	static final String IDENTIFIER = 'io.beekeeper.formatter'
 	static final private GradleVersion MIN_GRADLE_VERSION_SUPPORTED = GradleVersion.version("4.6")
 
 	private static final String FORMATTING_CONF_FOLDER = "beekeeper-formatter-rules"

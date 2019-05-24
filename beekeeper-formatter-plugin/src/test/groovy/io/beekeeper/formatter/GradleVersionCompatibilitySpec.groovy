@@ -1,4 +1,4 @@
-package io.beekeeper.formatting
+package io.beekeeper.formatter
 
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.TaskOutcome

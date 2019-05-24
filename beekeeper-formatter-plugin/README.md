@@ -24,7 +24,7 @@ Import the plugin in your gradle project by adding this line to the `build.gradl
 ```grovy
 plugins {
     // ...other plugins defined
-    id 'io.beekeeper.formatting' version '0.2.0'
+    id 'io.beekeeper.formatter' version '0.2.0'
 }
 ```
 
