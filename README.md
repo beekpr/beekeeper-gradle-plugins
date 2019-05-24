@@ -9,7 +9,7 @@ A set of plugins used in beekeeper's projects.
 
 Convention plugin for which plugins to apply.
 
-### `io.beekeeper.formatting`
+### `io.beekeeper.formatter`
 
 Formatting conventions for the following languages with `spotless`:
 

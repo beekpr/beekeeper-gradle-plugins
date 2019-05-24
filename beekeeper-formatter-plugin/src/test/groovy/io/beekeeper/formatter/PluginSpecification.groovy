@@ -1,10 +1,12 @@
-package io.beekeeper.formatting
+package io.beekeeper.formatter
 
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
+
+import io.beekeeper.formatter.FormatterPlugin
 import spock.lang.Specification
 
 class PluginSpecification extends Specification {

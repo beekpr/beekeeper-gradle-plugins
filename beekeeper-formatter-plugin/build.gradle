@@ -5,8 +5,8 @@ dependencies {
 gradlePlugin {
     plugins {
         formatterPlugin {
-            id = 'io.beekeeper.gradle.plugins.formatting'
-            implementationClass = 'io.beekeeper.formatting.FormatterPlugin'
+            id = 'io.beekeeper.gradle.plugins.formatter'
+            implementationClass = 'io.beekeeper.formatter.FormatterPlugin'
         }
     }
 }
@@ -18,7 +18,7 @@ pluginBundle {
     
     plugins {
 		formatterPlugin {
-			id = 'io.beekeeper.gradle.plugins.formatting'
+			id = 'io.beekeeper.gradle.plugins.formatter'
 			displayName = 'Beekeeper Formatting Plugin'
 			description = 'Formatting java projects with beekeepers formatting rules easily.'
 			website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'

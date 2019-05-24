@@ -4,7 +4,7 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.owasp.dependencycheck.gradle.DependencyCheckPlugin;
 
-import io.beekeeper.formatting.FormatterPlugin;
+import io.beekeeper.formatter.FormatterPlugin;
 
 public class BeekeeperPlugin implements Plugin<Project> {
 
