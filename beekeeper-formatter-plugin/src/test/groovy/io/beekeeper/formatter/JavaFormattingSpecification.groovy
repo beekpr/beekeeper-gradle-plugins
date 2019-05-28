@@ -7,12 +7,11 @@ import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 
 import io.beekeeper.formatter.FormatterPlugin
+import io.beekeeper.gradle.testing.SpecificationWithBuildFiles
 import spock.lang.Specification
 
-class PluginSpecification extends Specification {
+class JavaFormattingSpecification extends SpecificationWithBuildFiles {
 
-	@Rule
-	TemporaryFolder dir
 	GradleRunner runner
 
 	def setup() {
@@ -53,22 +52,5 @@ class PluginSpecification extends Specification {
 		lines.size() > 1
 		// at least some lines should be properly indented now
 		lines.any { line -> line.startsWith("    ") }
-	}
-
-	File getBuildFile() {
-		file('build.gradle')
-	}
-
-	File getSettingsFile() {
-		file('settings.gradle')
-	}
-
-	File file(String path) {
-		File f = new File(dir.root, path)
-		if (!f.exists()) {
-			f.parentFile.mkdirs()
-			return dir.newFile(path)
-		}
-		return f
 	}
 }

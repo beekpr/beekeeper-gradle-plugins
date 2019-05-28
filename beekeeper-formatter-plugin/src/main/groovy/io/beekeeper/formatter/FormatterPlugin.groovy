@@ -33,11 +33,14 @@ class FormatterPlugin implements Plugin<Project> {
 	}
 
 	void applySpotlessConfiguration(Project project) {
-		project.spotless {
-			java {
-				removeUnusedImports()
-				trimTrailingWhitespace()
-				eclipse().configFile getJavaFormattingRulesAbsoluteProjectPath(project)
+		if(project.plugins.findPlugin("java") != null) {
+			project.spotless {
+				java {
+					removeUnusedImports()
+					trimTrailingWhitespace()
+					endWithNewline()
+					eclipse().configFile getJavaFormattingRulesAbsoluteProjectPath(project)
+				}
 			}
 		}
 	}

@@ -1,0 +1,12 @@
+dependencies {
+	implementation group: 'com.github.jk1', name: 'gradle-license-report', version: '1.6'
+}
+
+gradlePlugin {
+    plugins {
+        licenseCheckPlugin {
+            id = 'io.beekeeper.gradle.plugins.license-check'
+            implementationClass = 'io.beekeeper.gradle.licenses.LicenseCheckPlugin'
+        }
+    }
+}

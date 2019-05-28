@@ -19,9 +19,12 @@ subprojects {
 
     group = 'io.beekeeper.gradle' 
     apply plugin: 'groovy'
-    apply plugin: 'java-gradle-plugin'
-    apply plugin: 'com.gradle.plugin-publish'
     apply plugin: 'com.diffplug.gradle.spotless'
+    
+    if(project.name.endsWith('-plugin')) {
+    	apply plugin: 'java-gradle-plugin'
+		apply plugin: 'com.gradle.plugin-publish'
+    }
 
     spotless {
         groovy {
@@ -31,10 +34,15 @@ subprojects {
 
     repositories {
         mavenCentral()
+        
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
     }
 
     dependencies {
-        implementation localGroovy()
         testImplementation "org.spockframework:spock-core:1.2-groovy-2.5"
+        implementation localGroovy()
+        testImplementation project(':plugin-test-helpers')
     }
 }
