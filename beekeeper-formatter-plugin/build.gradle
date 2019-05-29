@@ -15,13 +15,17 @@ pluginBundle {
     vcsUrl = 'https://github.com/beekpr/beekeeper-gradle-plugins/'
     tags = ['formatting', 'beekeeper']
     website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
-    
+
     plugins {
-		formatterPlugin {
-			id = 'io.beekeeper.gradle.plugins.formatter'
-			displayName = 'Beekeeper Formatting Plugin'
-			description = 'Formatting java projects with beekeepers formatting rules easily.'
-			website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
-		}
-	}
+        formatterPlugin {
+            id = 'io.beekeeper.gradle.plugins.formatter'
+            displayName = 'Beekeeper Formatting Plugin'
+            description = 'Formatting java projects with beekeepers formatting rules easily.'
+            website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+        }
+    }
+
+    mavenCoordinates {
+        groupId = project.group
+    }
 }

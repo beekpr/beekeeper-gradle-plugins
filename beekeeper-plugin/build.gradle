@@ -7,7 +7,7 @@ gradlePlugin {
     plugins {
         beekeeperPlugin {
             id = 'io.beekeeper.gradle.plugin'
-			implementationClass = 'io.beekeeper.gradle.plugin.BeekeeperPlugin'
+            implementationClass = 'io.beekeeper.gradle.plugin.BeekeeperPlugin'
         }
     }
 }
@@ -23,5 +23,9 @@ pluginBundle {
             description = 'A plugin that runs a set of utility plugins used at beekeeper'
             website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
         }
+    }
+
+    mavenCoordinates {
+        groupId = project.group
     }
 }
