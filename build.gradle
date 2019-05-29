@@ -13,8 +13,11 @@ plugins {
     id "com.diffplug.gradle.spotless" version "3.23.0"
 }
 
+group = 'io.beekeeper.gradle'
+
 subprojects {
 
+    group = 'io.beekeeper.gradle' 
     apply plugin: 'groovy'
     apply plugin: 'java-gradle-plugin'
     apply plugin: 'com.gradle.plugin-publish'
