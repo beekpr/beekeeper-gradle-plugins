@@ -18,7 +18,7 @@ Formatting conventions for the following languages with `spotless`:
 
 ## Disclaimer
 
-**The repository is public** and is not meant for containing credentials or other sensitive information.
+**The repository is public** and is not meant for containing _credentials or other sensitive_ information.
 
 ## License
 > Copyright 2019 Beekeeper
