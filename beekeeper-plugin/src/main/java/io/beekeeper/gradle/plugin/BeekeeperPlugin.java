@@ -10,11 +10,11 @@ public class BeekeeperPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
-        applyConfigToProject(project);
-    }
-
-    public void applyConfigToProject(Project project) {
         project.getPluginManager().apply(FormatterPlugin.class);
         project.getPluginManager().apply(DependencyCheckPlugin.class);
+
+        for (Project subproject : project.getSubprojects()) {
+            apply(subproject);
+        }
     }
 }
