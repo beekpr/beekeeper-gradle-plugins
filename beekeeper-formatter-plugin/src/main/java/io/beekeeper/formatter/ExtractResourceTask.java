@@ -8,6 +8,8 @@ import java.nio.file.StandardCopyOption;
 
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Task;
+import org.gradle.api.tasks.Input;
+import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 
 import com.diffplug.common.io.ByteSource;
@@ -15,7 +17,10 @@ import com.diffplug.common.io.Resources;
 
 public class ExtractResourceTask extends DefaultTask implements Task {
 
+    @Input
     private String resourcePath;
+
+    @OutputFile
     private String destination;
 
     public String getResourcePath() {
