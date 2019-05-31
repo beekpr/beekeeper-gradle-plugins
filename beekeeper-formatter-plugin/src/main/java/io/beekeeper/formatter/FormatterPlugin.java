@@ -11,25 +11,26 @@ import com.diffplug.gradle.spotless.SpotlessExtension;
 import com.diffplug.gradle.spotless.SpotlessPlugin;
 
 public class FormatterPlugin implements Plugin<Project> {
-    static final String IDENTIFIER = "io.beekeeper.gradle.plugins.formatter";
-    static final private GradleVersion MIN_GRADLE_VERSION_SUPPORTED = GradleVersion.version("4.6");
+    public static final String IDENTIFIER = "io.beekeeper.gradle.plugins.formatter";
+
+    private static final String PLUGIN_JAVA = "java";
+    private static final GradleVersion MIN_GRADLE_VERSION_SUPPORTED = GradleVersion.version("4.6");
 
     private static final String FORMATTING_CONF_FOLDER = "beekeeper-formatter-rules";
-    private static final String JAVA_FORMATTING_RULES_RELATIVE_PATH = FORMATTING_CONF_FOLDER + "/java/BeekeeperCodeFormat.xml";
+    private static final String JAVA_FORMATTING_RULES_RELATIVE_PATH = FORMATTING_CONF_FOLDER
+                                                                      + "/java/BeekeeperCodeFormat.xml";
 
     @Override
     public void apply(Project project) {
-        mandatoryGradleVersionCheck(project);
+        gradleVersionCheck(project);
 
-        project.getPluginManager().apply(SpotlessPlugin.class);
+        project.getPlugins().apply(SpotlessPlugin.class);
 
         applySpotlessJavaConfiguration(project);
-        project.afterEvaluate(pr -> {
-            applyFormatTask(project);
-        });
+        project.afterEvaluate(this::createFormatTask);
     }
 
-    private void mandatoryGradleVersionCheck(Project project) {
+    private void gradleVersionCheck(Project project) {
         GradleVersion currentGradleVersion = GradleVersion.version(project.getGradle().getGradleVersion());
 
         if (currentGradleVersion.compareTo(MIN_GRADLE_VERSION_SUPPORTED) < 0) {
@@ -38,27 +39,29 @@ public class FormatterPlugin implements Plugin<Project> {
     }
 
     private void applySpotlessJavaConfiguration(Project project) {
-        if (!project.getPluginManager().hasPlugin("java")) {
-            return;
-        }
 
         SpotlessExtension extension = project.getExtensions().findByType(SpotlessExtension.class);
         if (extension == null) {
             throw new GradleException("Must have spotless plugin installed");
         }
 
-        extension.java(java -> {
-            java.removeUnusedImports();
-            java.trimTrailingWhitespace();
+        // The Java Spotless Extension can only be applied with the Java plugin
+        // Otherwise, Spotless crashes. This is important as we may define
+        // our plugin before the java plugin
+        project.getPluginManager().withPlugin(PLUGIN_JAVA, javaPlugin -> {
+            extension.java(java -> {
+                java.removeUnusedImports();
+                java.trimTrailingWhitespace();
 
-            java.eclipse()
-                .configFile(
-                    getJavaFormattingRulesAbsoluteProjectPath(project)
-                );
+                java.eclipse()
+                    .configFile(
+                        getJavaFormattingRulesAbsoluteProjectPath(project)
+                        );
+            });
         });
     }
 
-    private void applyFormatTask(Project project) {
+    private void createFormatTask(Project project) {
         project.getTasks().create("extractBeekeeperFormattingConfig", ExtractResourceTask.class, (task) -> {
             task.setResourcePath(JAVA_FORMATTING_RULES_RELATIVE_PATH);
             task.setDestination(getJavaFormattingRulesAbsoluteProjectPath(project));
