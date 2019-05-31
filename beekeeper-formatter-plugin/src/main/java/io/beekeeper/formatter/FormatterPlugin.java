@@ -56,7 +56,7 @@ public class FormatterPlugin implements Plugin<Project> {
                 java.eclipse()
                     .configFile(
                         getJavaFormattingRulesAbsoluteProjectPath(project)
-                        );
+                    );
             });
         });
     }
