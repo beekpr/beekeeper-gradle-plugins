@@ -16,9 +16,8 @@ public class FormatterPlugin implements Plugin<Project> {
     private static final String PLUGIN_JAVA = "java";
     private static final GradleVersion MIN_GRADLE_VERSION_SUPPORTED = GradleVersion.version("4.6");
 
-    private static final String FORMATTING_CONF_FOLDER = "beekeeper-formatter-rules";
-    private static final String JAVA_FORMATTING_RULES_RELATIVE_PATH = FORMATTING_CONF_FOLDER
-                                                                      + "/java/BeekeeperCodeFormat.xml";
+    private static final String JAVA_FORMATTING_RULES_RELATIVE_PATH =
+        "beekeeper-formatter-rules/java/BeekeeperCodeFormat.xml";
 
     @Override
     public void apply(Project project) {
@@ -53,10 +52,7 @@ public class FormatterPlugin implements Plugin<Project> {
                 java.removeUnusedImports();
                 java.trimTrailingWhitespace();
 
-                java.eclipse()
-                    .configFile(
-                        getJavaFormattingRulesAbsoluteProjectPath(project)
-                    );
+                java.eclipse().configFile(getJavaRulesPath(project));
             });
         });
     }
@@ -64,7 +60,7 @@ public class FormatterPlugin implements Plugin<Project> {
     private void createFormatTask(Project project) {
         project.getTasks().create("extractBeekeeperFormattingConfig", ExtractResourceTask.class, (task) -> {
             task.setResourcePath(JAVA_FORMATTING_RULES_RELATIVE_PATH);
-            task.setDestination(getJavaFormattingRulesAbsoluteProjectPath(project));
+            task.setDestination(getJavaRulesPath(project));
         });
 
         // Make the spotless tasks dependent on the config extraction task,
@@ -73,7 +69,7 @@ public class FormatterPlugin implements Plugin<Project> {
         project.getTasksByName("spotlessApply", true).forEach(t -> t.dependsOn("extractBeekeeperFormattingConfig"));
     }
 
-    private String getJavaFormattingRulesAbsoluteProjectPath(Project project) {
+    private String getJavaRulesPath(Project project) {
         return Paths.get(project.getBuildDir().getAbsolutePath(), JAVA_FORMATTING_RULES_RELATIVE_PATH).toString();
     }
 }

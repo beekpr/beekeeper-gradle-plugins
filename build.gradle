@@ -1,6 +1,9 @@
 buildscript {
     repositories {
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+          }
     }
 
     dependencies {
@@ -9,8 +12,7 @@ buildscript {
 }
 
 plugins {
-    // eat our own dogfood and apply groovy code style via spotless
-    id "com.diffplug.gradle.spotless" version "3.23.0"
+    id "io.beekeeper.gradle.plugin" version "0.3.1"
 }
 
 group = 'io.beekeeper.gradle'
@@ -18,16 +20,10 @@ group = 'io.beekeeper.gradle'
 subprojects {
 
     group = 'io.beekeeper.gradle' 
+    apply plugin: 'java'
     apply plugin: 'groovy'
     apply plugin: 'java-gradle-plugin'
     apply plugin: 'com.gradle.plugin-publish'
-    apply plugin: 'com.diffplug.gradle.spotless'
-
-    spotless {
-        groovy {
-            greclipse()
-        }
-    }
 
     repositories {
         mavenCentral()
