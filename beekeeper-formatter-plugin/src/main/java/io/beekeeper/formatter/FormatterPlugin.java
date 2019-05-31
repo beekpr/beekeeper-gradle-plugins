@@ -69,8 +69,8 @@ public class FormatterPlugin implements Plugin<Project> {
 
         // Make the spotless tasks dependent on the config extraction task,
         // so they can reach the config files
-        project.getTasksByName("spotlessCheck", true).iterator().next().dependsOn("extractBeekeeperFormattingConfig");
-        project.getTasksByName("spotlessApply", true).iterator().next().dependsOn("extractBeekeeperFormattingConfig");
+        project.getTasksByName("spotlessCheck", true).forEach(t -> t.dependsOn("extractBeekeeperFormattingConfig"));
+        project.getTasksByName("spotlessApply", true).forEach(t -> t.dependsOn("extractBeekeeperFormattingConfig"));
     }
 
     private String getJavaFormattingRulesAbsoluteProjectPath(Project project) {
