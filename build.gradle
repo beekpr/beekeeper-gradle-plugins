@@ -25,6 +25,9 @@ subprojects {
     apply plugin: 'java-gradle-plugin'
     apply plugin: 'com.gradle.plugin-publish'
 
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+
     repositories {
         mavenCentral()
     }

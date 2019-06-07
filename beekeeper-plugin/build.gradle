@@ -1,7 +1,19 @@
+plugins {
+    id 'io.franzbecker.gradle-lombok' version '3.1.0'
+}
+
 dependencies {
+    implementation 'com.github.zafarkhaja:java-semver:0.9.0'
+
     implementation project(':beekeeper-formatter-plugin')
     implementation 'org.owasp:dependency-check-gradle:5.0.0-M3.1'
 }
+
+processResources {
+    filesMatching('plugin.properties') {
+      expand([version: version])
+    }
+  }
 
 gradlePlugin {
     plugins {
