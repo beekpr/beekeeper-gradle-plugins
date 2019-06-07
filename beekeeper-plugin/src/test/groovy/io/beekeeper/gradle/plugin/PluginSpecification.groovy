@@ -61,7 +61,7 @@ class PluginSpecification extends Specification {
         when:
         BuildResult result = runner
             .withArguments('beekeeperPluginCheck', '--stacktrace')
-            .build()
+            .buildAndFail()
 
         then:
         result.task(":beekeeperPluginCheck").outcome == FAILED
