@@ -39,7 +39,7 @@ class LicenseCheckPluginSpec extends SpecificationWithBuildFiles {
             runner = GradleRunner.create()
             .withProjectDir(dir.root)
             .withPluginClasspath()
-            
+
             buildFile << """
             plugins {
                 id '${LicenseCheckPlugin.IDENTIFIER}'
@@ -48,7 +48,7 @@ class LicenseCheckPluginSpec extends SpecificationWithBuildFiles {
 
         when:
             BuildResult result = runner.withArguments('checkLicense').build()
-        
+
         then:
             result.tasks.every { task -> task.outcome == TaskOutcome.SUCCESS }
     }
