@@ -1,32 +1,31 @@
 package io.beekeeper.gradle.licenses;
 
+import java.io.File;
+
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
-import org.gradle.api.tasks.Nested;
 
 import com.github.jk1.license.LicenseReportExtension;
 import com.github.jk1.license.LicenseReportPlugin;
-import com.github.jk1.license.ProjectData;
-import com.github.jk1.license.reader.ProjectReader;
-
 
 public class LicenseCheckPlugin implements Plugin<Project> {
 
     public static final String IDENTIFIER = "io.beekeeper.gradle.plugins.license-check";
 
-    @Nested
-    LicenseReportExtension getConfig(Project project) {
-        return (LicenseReportExtension) project.getExtensions().findByName("licenseReport");
-    }
-
     @Override
     public void apply(Project project) {
+        if (project.getParent() == null) {
+            // Only applied to parent as the license report plugin already
+            // supports sub-projects out of the box
+            return;
+        }
         project.getPluginManager().apply(LicenseReportPlugin.class);
-        ProjectData data = new ProjectReader(getConfig(project)).read(project);
 
-        data.getAllDependencies().forEach(moduleData -> {
-            project.getLogger()
-                .info("{}:{}, licenses: {}", moduleData.getGroup(), moduleData.getName(), moduleData.getLicenseFiles());
-        });
+        LicenseReportExtension extension = project.getExtensions().getByType(LicenseReportExtension.class);
+        extension.allowedLicensesFile = getAllowedLicensesFile();
+    }
+
+    private File getAllowedLicensesFile() {
+        return new File(LicenseCheckPlugin.class.getResource("allowed-licenses.json").getFile());
     }
 }

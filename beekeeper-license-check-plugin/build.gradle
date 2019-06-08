@@ -1,5 +1,5 @@
 dependencies {
-    implementation group: 'com.github.jk1', name: 'gradle-license-report', version: '1.6'
+    implementation 'com.github.jk1:gradle-license-report:1.7'
 }
 
 gradlePlugin {
