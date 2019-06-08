@@ -12,7 +12,7 @@ buildscript {
 }
 
 plugins {
-    id "io.beekeeper.gradle.plugin" version "0.5.1"
+    id "io.beekeeper.gradle.plugin" version "0.5.4"
 }
 
 group = 'io.beekeeper.gradle'
