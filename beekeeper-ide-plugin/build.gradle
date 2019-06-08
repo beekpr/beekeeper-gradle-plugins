@@ -9,7 +9,7 @@ gradlePlugin {
         }
     }
 }
-    
+
 pluginBundle {
     vcsUrl = 'https://github.com/beekpr/beekeeper-gradle-plugins/'
     tags = ['ide', 'beekeeper']

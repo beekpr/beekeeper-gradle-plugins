@@ -29,7 +29,7 @@ gradlePlugin {
 pluginBundle {
     vcsUrl = 'https://github.com/beekpr/beekeeper-gradle-plugin'
     tags = ['convention', 'beekeeper']
-    
+
     plugins {
         beekeeperPlugin {
             id = 'io.beekeeper.gradle.plugin'

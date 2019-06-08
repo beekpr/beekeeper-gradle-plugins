@@ -19,7 +19,7 @@ group = 'io.beekeeper.gradle'
 
 subprojects {
 
-    group = 'io.beekeeper.gradle' 
+    group = 'io.beekeeper.gradle'
     apply plugin: 'java'
     apply plugin: 'groovy'
 
@@ -30,7 +30,7 @@ subprojects {
 
     repositories {
         mavenCentral()
-        
+
         maven {
             url 'https://plugins.gradle.org/m2/'
         }

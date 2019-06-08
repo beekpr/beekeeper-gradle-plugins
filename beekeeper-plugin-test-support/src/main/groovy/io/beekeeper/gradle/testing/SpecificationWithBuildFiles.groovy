@@ -6,23 +6,23 @@ import spock.lang.Specification
 
 class SpecificationWithBuildFiles extends Specification {
 
-	@Rule
-	TemporaryFolder dir
+    @Rule
+    TemporaryFolder dir
 
-	File getSettingsFile() {
-		file('settings.gradle')
-	}
+    File getSettingsFile() {
+        file('settings.gradle')
+    }
 
-	File getBuildFile() {
-		file('build.gradle')
-	}
+    File getBuildFile() {
+        file('build.gradle')
+    }
 
-	File file(String path) {
-		File f = new File(dir.root, path)
-		if (!f.exists()) {
-			f.parentFile.mkdirs()
-			return dir.newFile(path)
-		}
-		return f
-	}
+    File file(String path) {
+        File f = new File(dir.root, path)
+        if (!f.exists()) {
+            f.parentFile.mkdirs()
+            return dir.newFile(path)
+        }
+        return f
+    }
 }

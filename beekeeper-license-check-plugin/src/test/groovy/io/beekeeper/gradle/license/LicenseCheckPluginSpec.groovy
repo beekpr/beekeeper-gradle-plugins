@@ -13,36 +13,36 @@ import spock.lang.Specification
 
 class LicenseCheckPluginSpec extends SpecificationWithBuildFiles {
 
-	GradleRunner runner
+    GradleRunner runner
 
-	def "it should apply the license check plugin when applied"() {
-		given:
-		runner = GradleRunner.create()
-				.withProjectDir(dir.root)
-				.withPluginClasspath()
+    def "it should apply the license check plugin when applied"() {
+        given:
+        runner = GradleRunner.create()
+                .withProjectDir(dir.root)
+                .withPluginClasspath()
 
-		buildFile << """
+        buildFile << """
             plugins {
                 id '${LicenseCheckPlugin.IDENTIFIER}'
             }
         """
 
-		when:
-		BuildResult result = runner.withArguments('generateLicenseReport').build()
+        when:
+        BuildResult result = runner.withArguments('generateLicenseReport').build()
 
-		then:
-		result.tasks.every { task -> task.outcome == TaskOutcome.SUCCESS }
-	}
+        then:
+        result.tasks.every { task -> task.outcome == TaskOutcome.SUCCESS }
+    }
 
-	@Ignore
-	def "it should fail for evil license dependencies" () {
-		given:
-		runner = GradleRunner.create()
-				.withProjectDir(dir.root)
-				.withPluginClasspath()
+    @Ignore
+    def "it should fail for evil license dependencies" () {
+        given:
+        runner = GradleRunner.create()
+                .withProjectDir(dir.root)
+                .withPluginClasspath()
 
 
-		buildFile << """
+        buildFile << """
          plugins {
            id 'java'
            id '${LicenseCheckPlugin.IDENTIFIER}'
@@ -57,7 +57,7 @@ class LicenseCheckPluginSpec extends SpecificationWithBuildFiles {
          }
         """
 
-		expect:
-		2 == 2
-	}
+        expect:
+        2 == 2
+    }
 }
