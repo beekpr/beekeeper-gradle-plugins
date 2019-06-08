@@ -12,20 +12,21 @@ import com.github.jk1.license.reader.ProjectReader;
 
 public class LicenseCheckPlugin implements Plugin<Project> {
 
-	public static final String IDENTIFIER = "io.beekeeper.gradle.plugins.license-check";
+    public static final String IDENTIFIER = "io.beekeeper.gradle.plugins.license-check";
 
-	@Nested
-	LicenseReportExtension getConfig(Project project) {
-		return (LicenseReportExtension) project.getExtensions().findByName("licenseReport");
-	}
+    @Nested
+    LicenseReportExtension getConfig(Project project) {
+        return (LicenseReportExtension) project.getExtensions().findByName("licenseReport");
+    }
 
-	@Override
-	public void apply(Project project) {
-		project.getPluginManager().apply(LicenseReportPlugin.class);
-		ProjectData data = new ProjectReader(getConfig(project)).read(project);
+    @Override
+    public void apply(Project project) {
+        project.getPluginManager().apply(LicenseReportPlugin.class);
+        ProjectData data = new ProjectReader(getConfig(project)).read(project);
 
-		data.getAllDependencies().forEach(moduleData -> {
-            project.getLogger().info("{}:{}, licenses: {}", moduleData.getGroup(), moduleData.getName(), moduleData.getLicenseFiles());
-		});
-	}
+        data.getAllDependencies().forEach(moduleData -> {
+            project.getLogger()
+                .info("{}:{}, licenses: {}", moduleData.getGroup(), moduleData.getName(), moduleData.getLicenseFiles());
+        });
+    }
 }
