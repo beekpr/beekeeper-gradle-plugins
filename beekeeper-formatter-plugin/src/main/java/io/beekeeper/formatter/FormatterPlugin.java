@@ -14,6 +14,7 @@ public class FormatterPlugin implements Plugin<Project> {
     public static final String IDENTIFIER = "io.beekeeper.gradle.plugins.formatter";
 
     private static final String PLUGIN_JAVA = "java";
+    private static final String PLUGIN_GROOVY = "groovy";
     private static final GradleVersion MIN_GRADLE_VERSION_SUPPORTED = GradleVersion.version("4.6");
 
     private static final String JAVA_FORMATTING_RULES_RELATIVE_PATH =
@@ -26,6 +27,8 @@ public class FormatterPlugin implements Plugin<Project> {
         project.getPlugins().apply(SpotlessPlugin.class);
 
         applySpotlessJavaConfiguration(project);
+        applySpotlessGroovyConfiguration(project);
+        applySpotlessGradleConfiguration(project);
         project.afterEvaluate(this::createFormatTask);
     }
 
@@ -54,6 +57,36 @@ public class FormatterPlugin implements Plugin<Project> {
 
                 java.eclipse().configFile(getJavaRulesPath(project));
             });
+        });
+    }
+
+    private void applySpotlessGroovyConfiguration(Project project) {
+
+        SpotlessExtension extension = project.getExtensions().findByType(SpotlessExtension.class);
+        if (extension == null) {
+            throw new GradleException("Must have spotless plugin installed");
+        }
+
+        // The Groovy Spotless Extension can only be applied with the Groovy plugin
+        // Otherwise, Spotless crashes. This is important as we may define
+        // our plugin before the goovy plugin
+        project.getPluginManager().withPlugin(PLUGIN_GROOVY, javaPlugin -> {
+            extension.groovy(groovy -> {
+                groovy.trimTrailingWhitespace();
+                groovy.indentWithSpaces(4);
+            });
+        });
+    }
+
+    private void applySpotlessGradleConfiguration(Project project) {
+        SpotlessExtension extension = project.getExtensions().findByType(SpotlessExtension.class);
+        if (extension == null) {
+            throw new GradleException("Must have spotless plugin installed");
+        }
+
+        extension.groovyGradle(gradle -> {
+            gradle.trimTrailingWhitespace();
+            gradle.indentWithSpaces(4);
         });
     }
 
