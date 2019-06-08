@@ -1,0 +1,30 @@
+dependencies {
+}
+
+gradlePlugin {
+    plugins {
+        formatterPlugin {
+            id = 'io.beekeeper.gradle.plugins.ide'
+            implementationClass = 'io.beekeeper.ide.IdePlugin'
+        }
+    }
+}
+
+pluginBundle {
+    vcsUrl = 'https://github.com/beekpr/beekeeper-gradle-plugins/'
+    tags = ['ide', 'beekeeper']
+    website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+
+    plugins {
+        idePlugin {
+            id = 'io.beekeeper.gradle.plugins.ide'
+            displayName = 'Beekeeper IDE Plugin'
+            description = 'Make projects easily usable within IDEs.'
+            website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+        }
+    }
+
+    mavenCoordinates {
+        groupId = project.group
+    }
+}

@@ -6,6 +6,7 @@ import org.owasp.dependencycheck.gradle.DependencyCheckPlugin;
 
 import io.beekeeper.formatter.FormatterPlugin;
 import io.beekeeper.gradle.plugin.tasks.CheckVersionTask;
+import io.beekeeper.ide.IdePlugin;
 
 public class BeekeeperPlugin implements Plugin<Project> {
 
@@ -37,6 +38,7 @@ public class BeekeeperPlugin implements Plugin<Project> {
     private void applyPlugins(Project project) {
         project.getPluginManager().apply(FormatterPlugin.class);
         project.getPluginManager().apply(DependencyCheckPlugin.class);
+        project.getPluginManager().apply(IdePlugin.class);
 
         for (Project subproject : project.getSubprojects()) {
             applyPlugins(subproject);

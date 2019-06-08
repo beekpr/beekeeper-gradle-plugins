@@ -3,9 +3,10 @@ plugins {
 }
 
 dependencies {
-    implementation 'com.github.zafarkhaja:java-semver:0.9.0'
-
     implementation project(':beekeeper-formatter-plugin')
+    implementation project(':beekeeper-ide-plugin')
+
+    implementation 'com.github.zafarkhaja:java-semver:0.9.0'
     implementation 'org.owasp:dependency-check-gradle:5.0.0-M3.1'
 }
 
