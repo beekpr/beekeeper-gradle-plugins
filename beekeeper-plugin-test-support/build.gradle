@@ -1,0 +1,5 @@
+
+dependencies {
+	implementation localGroovy()
+	implementation "org.spockframework:spock-core:1.2-groovy-2.5"
+}

@@ -22,15 +22,23 @@ subprojects {
     group = 'io.beekeeper.gradle' 
     apply plugin: 'java'
     apply plugin: 'groovy'
-    apply plugin: 'java-gradle-plugin'
-    apply plugin: 'com.gradle.plugin-publish'
+
+    if(project.name.endsWith('-plugin')) {
+        apply plugin: 'java-gradle-plugin'
+        apply plugin: 'com.gradle.plugin-publish'
+    }
 
     repositories {
         mavenCentral()
+        
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
     }
 
     dependencies {
         implementation localGroovy()
+        testImplementation project(':beekeeper-plugin-test-support')
         testImplementation "org.spockframework:spock-core:1.2-groovy-2.5"
     }
 }

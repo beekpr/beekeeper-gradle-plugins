@@ -1,11 +1,16 @@
 package io.beekeeper.formatter
 
+import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.TaskOutcome
 import org.gradle.testkit.runner.UnexpectedBuildFailure
+import org.junit.Rule
+
+import io.beekeeper.gradle.testing.SpecificationWithBuildFiles
+import spock.lang.Ignore
 import spock.lang.Unroll
 
-class GradleVersionCompatibilitySpec extends PluginSpecification {
+class GradleVersionCompatibilitySpec extends SpecificationWithBuildFiles {
 
 	static final List<String> supportedVersions = [
 		'4.6',
@@ -19,13 +24,30 @@ class GradleVersionCompatibilitySpec extends PluginSpecification {
 	]
 	static final List<String> unsupportedVersions = ['4.5.1', '4.4.1', '3.5']
 
+	GradleRunner runner
+
+	def setup() {
+		runner = GradleRunner.create()
+				.withProjectDir(dir.root)
+				.withPluginClasspath()
+
+		buildFile << """
+        buildscript {
+            repositories { mavenCentral() }
+        }
+        plugins {
+            id 'java'
+            id '${FormatterPlugin.IDENTIFIER}'
+        }
+        """
+	}
+
 	@Unroll
 	def 'plugin nicely applies with gradle #gradleVersion'() {
 		given:
 		runner = runner.withGradleVersion(gradleVersion)
 
 		buildFile << """
-
         task foo {
             doLast {
                 println "Formatting completed"
