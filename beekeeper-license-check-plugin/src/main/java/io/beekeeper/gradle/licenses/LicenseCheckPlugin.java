@@ -14,7 +14,7 @@ public class LicenseCheckPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
-        if (project.getParent() == null) {
+        if (project.getParent() != null) {
             // Only applied to parent as the license report plugin already
             // supports sub-projects out of the box
             return;
