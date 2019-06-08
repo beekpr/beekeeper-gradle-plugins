@@ -1,10 +1,85 @@
 {
-  "allowedLicenses": [
-    {
-      "moduleLicense": "Apache License, Version 2.0",
-    },
-    {
-      "moduleLicense": "MIT License"
-    }
-  ]
+    "allowedLicenses": [
+        {
+            "moduleLicense": "Apache 2"
+        },
+        {
+            "moduleLicense": "Apache-2.0"
+        },
+        {
+            "moduleLicense": "Apache 2.0"
+        },
+        {
+            "moduleLicense": "Apache License, Version 2.0"
+        },
+        {
+            "moduleLicense": "The Apache Software License, Version 2.0"
+        },
+
+        {
+            "moduleLicense": "Eclipse Public License 1.0"
+        },
+        {
+            "moduleLicense": "Eclipse Distribution License (New BSD License)"
+        },
+
+        {
+            "moduleLicense": "MIT"
+        },
+        {
+            "moduleLicense": "MIT License"
+        },
+        {
+            "moduleLicense": "The MIT License"
+        },
+
+        {
+            "moduleLicense": "GNU Lesser General Public License"
+        },
+        {
+            "moduleLicense": "LGPL"
+        },
+        {
+            "moduleLicense": "GPL2 w/ CPE"
+        },
+
+        {
+            "moduleLicense": "The JSON License"
+        },
+
+        {
+            "moduleLicense": "New BSD License"
+        },
+
+        {
+            "moduleLicense": "MPL 2.0 or EPL 1.0"
+        },
+        {
+            "moduleLicense": "Revised BSD"
+        },
+
+        {
+            "moduleLicense": "ASL2"
+        },
+
+        {
+            "moduleLicense": "CDDL 1.1"
+        },
+        {
+            "moduleLicense": "CDDL/GPLv2+CE"
+        },
+        {
+            "moduleLicense": "COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0"
+        },
+
+        {
+            "moduleName": "javax.ws.rs:javax.ws.rs-api"
+        },
+        {
+            "moduleName": "org.glassfish:javax.json"
+        },
+        {   
+            "moduleName": "com.github.jk1:gradle-license-report"
+        }
+    ]
 }
