@@ -34,6 +34,25 @@ class LicenseCheckPluginSpec extends SpecificationWithBuildFiles {
         result.tasks.every { task -> task.outcome == TaskOutcome.SUCCESS }
     }
 
+    def "it should apply configure the license check correctly"() {
+        given:
+            runner = GradleRunner.create()
+            .withProjectDir(dir.root)
+            .withPluginClasspath()
+            
+            buildFile << """
+            plugins {
+                id '${LicenseCheckPlugin.IDENTIFIER}'
+            }
+            """
+
+        when:
+            BuildResult result = runner.withArguments('checkLicense').build()
+        
+        then:
+            result.tasks.every { task -> task.outcome == TaskOutcome.SUCCESS }
+    }
+
     @Ignore
     def "it should fail for evil license dependencies" () {
         given:

@@ -1,7 +1,9 @@
 package io.beekeeper.gradle.licenses;
 
 import java.io.File;
+import java.net.URISyntaxException;
 
+import org.gradle.api.GradleException;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
@@ -26,6 +28,10 @@ public class LicenseCheckPlugin implements Plugin<Project> {
     }
 
     private File getAllowedLicensesFile() {
-        return new File(LicenseCheckPlugin.class.getResource("allowed-licenses.json").getFile());
+        try {
+            return new File(LicenseCheckPlugin.class.getResource("allowed-licenses.json").toURI());
+        } catch (URISyntaxException e) {
+            throw new GradleException("Unexpected error", e);
+        }
     }
 }
