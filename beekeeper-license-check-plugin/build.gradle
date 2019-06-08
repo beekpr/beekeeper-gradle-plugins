@@ -1,5 +1,5 @@
 dependencies {
-	implementation group: 'com.github.jk1', name: 'gradle-license-report', version: '1.6'
+    implementation group: 'com.github.jk1', name: 'gradle-license-report', version: '1.6'
 }
 
 gradlePlugin {
@@ -8,5 +8,24 @@ gradlePlugin {
             id = 'io.beekeeper.gradle.plugins.license-check'
             implementationClass = 'io.beekeeper.gradle.licenses.LicenseCheckPlugin'
         }
+    }
+}
+
+pluginBundle {
+    vcsUrl = 'https://github.com/beekpr/beekeeper-gradle-plugins/'
+    tags = ['beekeeper']
+    website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+
+    plugins {
+        licenseCheckPlugin {
+            id = 'io.beekeeper.gradle.plugins.license-check'
+            displayName = 'Beekeeper License Check'
+            description = 'Ensures that you are using the right licenses'
+            website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+        }
+    }
+
+    mavenCoordinates {
+        groupId = project.group
     }
 }
