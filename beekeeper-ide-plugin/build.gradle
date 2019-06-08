@@ -3,13 +3,13 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        formatterPlugin {
+        idePlugin {
             id = 'io.beekeeper.gradle.plugins.ide'
             implementationClass = 'io.beekeeper.ide.IdePlugin'
         }
     }
 }
-
+    
 pluginBundle {
     vcsUrl = 'https://github.com/beekpr/beekeeper-gradle-plugins/'
     tags = ['ide', 'beekeeper']
