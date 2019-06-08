@@ -3,13 +3,10 @@ package io.beekeeper.gradle.license
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
-import org.junit.Rule
-import org.junit.rules.TemporaryFolder
 
 import io.beekeeper.gradle.licenses.LicenseCheckPlugin
 import io.beekeeper.gradle.testing.SpecificationWithBuildFiles
 import spock.lang.Ignore
-import spock.lang.Specification
 
 class LicenseCheckPluginSpec extends SpecificationWithBuildFiles {
 
@@ -18,8 +15,8 @@ class LicenseCheckPluginSpec extends SpecificationWithBuildFiles {
     def "it should apply the license check plugin when applied"() {
         given:
         runner = GradleRunner.create()
-                .withProjectDir(dir.root)
-                .withPluginClasspath()
+            .withProjectDir(dir.root)
+            .withPluginClasspath()
 
         buildFile << """
             plugins {
@@ -28,7 +25,7 @@ class LicenseCheckPluginSpec extends SpecificationWithBuildFiles {
         """
 
         when:
-        BuildResult result = runner.withArguments('generateLicenseReport').build()
+        BuildResult result = runner.withArguments('generateLicenseReport', '--stacktrace').build()
 
         then:
         result.tasks.every { task -> task.outcome == TaskOutcome.SUCCESS }
@@ -36,29 +33,29 @@ class LicenseCheckPluginSpec extends SpecificationWithBuildFiles {
 
     def "it should apply configure the license check correctly"() {
         given:
-            runner = GradleRunner.create()
+        runner = GradleRunner.create()
             .withProjectDir(dir.root)
             .withPluginClasspath()
 
-            buildFile << """
+        buildFile << """
             plugins {
                 id '${LicenseCheckPlugin.IDENTIFIER}'
             }
             """
 
         when:
-            BuildResult result = runner.withArguments('checkLicense').build()
+        BuildResult result = runner.withArguments('checkLicense', '--stacktrace').build()
 
         then:
-            result.tasks.every { task -> task.outcome == TaskOutcome.SUCCESS }
+        result.tasks.every { task -> task.outcome == TaskOutcome.SUCCESS }
     }
 
     @Ignore
     def "it should fail for evil license dependencies" () {
         given:
         runner = GradleRunner.create()
-                .withProjectDir(dir.root)
-                .withPluginClasspath()
+            .withProjectDir(dir.root)
+            .withPluginClasspath()
 
 
         buildFile << """

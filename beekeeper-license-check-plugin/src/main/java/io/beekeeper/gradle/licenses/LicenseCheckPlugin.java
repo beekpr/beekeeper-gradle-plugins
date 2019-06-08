@@ -1,7 +1,10 @@
 package io.beekeeper.gradle.licenses;
 
 import java.io.File;
-import java.net.URISyntaxException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 import org.gradle.api.GradleException;
 import org.gradle.api.Plugin;
@@ -29,9 +32,16 @@ public class LicenseCheckPlugin implements Plugin<Project> {
 
     private File getAllowedLicensesFile() {
         try {
-            return new File(LicenseCheckPlugin.class.getResource("allowed-licenses.json").toURI());
-        } catch (URISyntaxException e) {
-            throw new GradleException("Unexpected error", e);
+            Path path = Files.createTempFile("license-check-allowed-licenses", ".json");
+            Files.copy(
+                LicenseCheckPlugin.class.getResourceAsStream("allowed-licenses.json"),
+                path,
+                StandardCopyOption.REPLACE_EXISTING);
+            File file = path.toFile();
+            file.deleteOnExit();
+            return file;
+        } catch (IOException e) {
+            throw new GradleException("Unexpected error: " + e.getMessage(), e);
         }
     }
 }
