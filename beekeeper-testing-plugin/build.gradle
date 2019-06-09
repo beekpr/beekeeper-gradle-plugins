@@ -1,0 +1,30 @@
+dependencies {
+}
+
+gradlePlugin {
+    plugins {
+        testingPlugin {
+            id = 'io.beekeeper.gradle.plugins.testing'
+            implementationClass = 'io.beekeeper.gradle.testing.TestingPlugin'
+        }
+    }
+}
+
+pluginBundle {
+    vcsUrl = 'https://github.com/beekpr/beekeeper-gradle-plugins/'
+    tags = ['beekeeper']
+    website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+
+    plugins {
+        testingPlugin {
+            id = 'io.beekeeper.gradle.plugins.testing'
+            displayName = 'Beekeeper Testing Plugin'
+            description = 'Bekeeper common settings for testing. Includes Code Coverage.'
+            website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+        }
+    }
+
+    mavenCoordinates {
+        groupId = project.group
+    }
+}

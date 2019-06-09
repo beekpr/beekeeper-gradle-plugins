@@ -60,6 +60,11 @@ Comes also with a preconfigured list of allowed licenses for Beekeeper
 Provides support for checking for dependencies with known vulnarabilities.
 Applies the `org.owasp:dependency-check-gradle` plugin.
 
+### Module Plugin: `io.beekeeper.gradle.plugins.testing`
+
+Provides support for test related tasks..
+Applies the `jacoco` plugin.
+
 
 ## Instructions
 
@@ -74,6 +79,7 @@ If you are migrating an existing beekeeper project to make use of this plugin, t
    * Remove any of the following plugins which may be already in use and any of their configuration
       * findbugs (check for tasks.withType(FindBugs))
       * eclipse
+      * jacoco (remove jacoco configuration from gradle)
       * idea
    * That's it!
 
