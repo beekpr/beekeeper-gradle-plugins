@@ -2,7 +2,9 @@ rootProject.name = 'beekeeper-gradle-plugins'
 
 include ':beekeeper-plugin-test-support'
 
+include ':beekeeper-code-analysis-plugin'
 include ':beekeeper-formatter-plugin'
 include ':beekeeper-ide-plugin'
-include ':beekeeper-plugin'
 include ':beekeeper-license-check-plugin'
+include ':beekeeper-security-plugin'
+include ':beekeeper-plugin'

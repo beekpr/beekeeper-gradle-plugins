@@ -1,0 +1,31 @@
+dependencies {
+    implementation 'org.owasp:dependency-check-gradle:5.0.0-M3.1'
+}
+
+gradlePlugin {
+    plugins {
+        securityPlugin {
+            id = 'io.beekeeper.gradle.plugins.security'
+            implementationClass = 'io.beekeeper.gradle.security.SecurityPlugin'
+        }
+    }
+}
+
+pluginBundle {
+    vcsUrl = 'https://github.com/beekpr/beekeeper-gradle-plugins/'
+    tags = ['beekeeper']
+    website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+
+    plugins {
+        securityPlugin {
+            id = 'io.beekeeper.gradle.plugins.security'
+            displayName = 'Beekeeper Security Check'
+            description = 'Ensures that there are no security problems with the code base'
+            website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+        }
+    }
+
+    mavenCoordinates {
+        groupId = project.group
+    }
+}

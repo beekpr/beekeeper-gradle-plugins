@@ -1,0 +1,31 @@
+dependencies {
+    implementation 'gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:2.0.0'
+}
+
+gradlePlugin {
+    plugins {
+        codeAnalysisPlugin {
+            id = 'io.beekeeper.gradle.plugins.code-analysis-check'
+            implementationClass = 'io.beekeeper.gradle.code.CodeAnalysisPlugin'
+        }
+    }
+}
+
+pluginBundle {
+    vcsUrl = 'https://github.com/beekpr/beekeeper-gradle-plugins/'
+    tags = ['beekeeper']
+    website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+
+    plugins {
+        codeAnalysisPlugin {
+            id = 'io.beekeeper.gradle.plugins.code-analysis-check'
+            displayName = 'Beekeeper Code Analysis Plugin'
+            description = 'Runs static analysis on the code to check for correctnes'
+            website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+        }
+    }
+
+    mavenCoordinates {
+        groupId = project.group
+    }
+}
