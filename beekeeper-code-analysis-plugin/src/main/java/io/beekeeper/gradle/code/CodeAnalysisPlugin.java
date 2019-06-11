@@ -35,11 +35,14 @@ public class CodeAnalysisPlugin implements Plugin<Project> {
 
     private void configureTasks(Project project) {
         project.getTasks().withType(SpotBugsTask.class, task -> {
-            task.getReports().getXml().setEnabled(true);
-            task.getReports().getHtml().setEnabled(true);
-            task.getReports().getEmacs().setEnabled(true);
-            task.getReports().getText().setEnabled(true);
+            boolean isJenkins = isJenkins();
+            task.getReports().getXml().setEnabled(isJenkins);
+            task.getReports().getHtml().setEnabled(!isJenkins);
         });
+    }
+
+    private boolean isJenkins() {
+        return System.getenv("JENKINS_URL") != null;
     }
 
 }
