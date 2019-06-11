@@ -39,7 +39,7 @@ public class CheckVersionTask extends DefaultTask implements Task {
             if (required.greaterThan(actual)) {
                 throw new GradleException(
                         String.format(
-                            "Plugin requires upgrade.\n\t Required version: '%s'.\n\t Current version: '%s'",
+                            "Plugin requires upgrade.%n\t Required version: '%s'.%n\t Current version: '%s'",
                             requiredVersionString,
                             actualVersionString
                         )
@@ -59,8 +59,10 @@ public class CheckVersionTask extends DefaultTask implements Task {
     }
 
     private String getCurrentVersion() throws IOException {
-        Properties properties = new Properties();
-        properties.load(BeekeeperPlugin.class.getResourceAsStream("/plugin.properties"));
-        return properties.getProperty("version");
+        try (InputStream stream = BeekeeperPlugin.class.getResourceAsStream("/plugin.properties")) {
+            Properties properties = new Properties();
+            properties.load(stream);
+            return properties.getProperty("version");
+        }
     }
 }

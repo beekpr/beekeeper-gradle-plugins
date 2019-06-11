@@ -11,6 +11,10 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'groovy'
 
+    spotbugs {
+        sourceSets = [sourceSets.main]
+    }
+
     if(project.name.endsWith('-plugin')) {
         apply plugin: 'java-gradle-plugin'
         apply plugin: 'com.gradle.plugin-publish'

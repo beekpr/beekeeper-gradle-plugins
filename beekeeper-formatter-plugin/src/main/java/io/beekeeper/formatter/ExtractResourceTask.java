@@ -46,8 +46,12 @@ public class ExtractResourceTask extends DefaultTask implements Task {
         ByteSource source = Resources.asByteSource(Resources.getResource(resourcePath));
         File destination = getProject().file(getDestination());
 
-        destination.getParentFile().mkdirs();
+        IGNORE_RESULT(destination.getParentFile().mkdirs());
         Files.copy(source.openStream(), Paths.get(destination.toURI()), StandardCopyOption.REPLACE_EXISTING);
         getLogger().info("Resource successfully copied.");
+    }
+
+    @SuppressWarnings("unused")
+    private static void IGNORE_RESULT(boolean b) {
     }
 }
