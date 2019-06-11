@@ -1,6 +1,6 @@
 plugins {
     id "com.gradle.plugin-publish" version "0.10.1" apply false
-    id "io.beekeeper.gradle.plugin" version "0.7.0"
+    id "io.beekeeper.gradle.plugin" version "0.7.2"
 }
 
 group = 'io.beekeeper.gradle'
@@ -10,10 +10,6 @@ subprojects {
     group = 'io.beekeeper.gradle'
     apply plugin: 'java'
     apply plugin: 'groovy'
-
-    spotbugs {
-        sourceSets = [sourceSets.main]
-    }
 
     if(project.name.endsWith('-plugin')) {
         apply plugin: 'java-gradle-plugin'
