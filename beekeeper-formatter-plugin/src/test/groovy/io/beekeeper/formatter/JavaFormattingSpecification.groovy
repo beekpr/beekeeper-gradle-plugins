@@ -4,22 +4,23 @@ import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
 import org.junit.Rule
-import org.junit.rules.TemporaryFolder
 
-import io.beekeeper.formatter.FormatterPlugin
-import io.beekeeper.gradle.testing.SpecificationWithBuildFiles
+import io.beekeeper.gradle.testing.GradleWorkspace
 import spock.lang.Specification
 
-class JavaFormattingSpecification extends SpecificationWithBuildFiles {
+class JavaFormattingSpecification extends Specification {
+
+    @Rule
+    GradleWorkspace workspace
 
     GradleRunner runner
 
     def setup() {
-        runner = GradleRunner.create()
-                .withProjectDir(dir.root)
-                .withPluginClasspath()
+        runner = workspace
+            .runner
+            .withPluginClasspath()
 
-        buildFile << """
+        workspace.buildFile << """
         plugins {
             id 'java'
             id '${FormatterPlugin.IDENTIFIER}'
@@ -37,7 +38,7 @@ class JavaFormattingSpecification extends SpecificationWithBuildFiles {
 
     def "it should format a trivial java file" () {
         given:
-        def snip = file("src/main/java/Snip.java")
+        def snip = workspace.file("src/main/java/Snip.java")
 
         snip << """class Snip { public static void main(String ... args) { System.out.println("Snip"); } }"""
 
@@ -48,7 +49,7 @@ class JavaFormattingSpecification extends SpecificationWithBuildFiles {
         result.getOutput().contains("spotless")
         result.tasks.every { task -> task.outcome == TaskOutcome.SUCCESS }
 
-        def lines = file("src/main/java/Snip.java").readLines()
+        def lines = workspace.file("src/main/java/Snip.java").readLines()
         lines.size() > 1
         // at least some lines should be properly indented now
         lines.any { line -> line.startsWith("    ") }

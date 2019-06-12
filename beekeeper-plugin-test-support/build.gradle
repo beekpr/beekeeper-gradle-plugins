@@ -1,5 +1,6 @@
 
 dependencies {
     implementation localGroovy()
+    implementation gradleTestKit()
     implementation "org.spockframework:spock-core:1.2-groovy-2.5"
 }
