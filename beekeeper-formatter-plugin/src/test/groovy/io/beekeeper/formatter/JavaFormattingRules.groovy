@@ -30,11 +30,11 @@ class JavaFormattingRules extends Specification {
 
     @Unroll
     def "the code style is in line with the files provided in #sourceFile"() {
-        given: {
-            def resourceName = this.class.name.replace('.', '/') + "_OK_$sourceFile"
-            workspace.file("src/main/java/io/beekeeper/formatter/$sourceFile") <<
-                this.class.classLoader.getResource(resourceName).text
-        }
+        given:
+        def resourceName = this.class.name.replace('.', '/') + "_OK_$sourceFile"
+        workspace.file("src/main/java/io/beekeeper/formatter/$sourceFile") <<
+            this.class.classLoader.getResource(resourceName).text
+
 
         when:
         BuildResult result = runner.withArguments('spotlessCheck').build()
