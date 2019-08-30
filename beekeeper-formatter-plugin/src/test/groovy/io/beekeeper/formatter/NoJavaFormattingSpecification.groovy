@@ -28,7 +28,7 @@ class NoJavaFormattingSpecification extends Specification {
 
     def "it should NOT apply the spotless java plugin in a non-java project"() {
         when:
-        BuildResult result = runner.withArguments('tasks').build()
+        BuildResult result = runner.withArguments('tasks', '--all').build()
 
         then:
         !result.output.contains("spotlessJava")
