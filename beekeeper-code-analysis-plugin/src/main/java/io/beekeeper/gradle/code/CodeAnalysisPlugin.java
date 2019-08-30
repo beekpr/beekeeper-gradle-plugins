@@ -17,12 +17,12 @@ public class CodeAnalysisPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
-        project.getPluginManager().apply(SpotBugsPlugin.class);
-
-        SpotBugsExtension config = project.getExtensions().getByType(SpotBugsExtension.class);
-        config.setToolVersion("3.1.12");
-
         project.getPluginManager().withPlugin("java", it -> {
+            project.getPluginManager().apply(SpotBugsPlugin.class);
+
+            SpotBugsExtension config = project.getExtensions().getByType(SpotBugsExtension.class);
+            config.setToolVersion("3.1.12");
+
             SourceSet main = project.getConvention()
                 .getPlugin(JavaPluginConvention.class)
                 .getSourceSets()
