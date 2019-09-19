@@ -30,7 +30,7 @@ public class CheckVersionTask extends DefaultTask implements Task {
     @TaskAction
     public void check() throws MalformedURLException, IOException {
         try (InputStream stream = new URL(this.url).openStream()) {
-            String requiredVersionString = read(stream);
+            String requiredVersionString = read(stream).trim();
             String actualVersionString = getCurrentVersion();
 
             Version required = Version.valueOf(requiredVersionString);
