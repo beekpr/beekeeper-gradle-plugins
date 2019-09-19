@@ -1,5 +1,5 @@
 dependencies {
-    implementation 'org.owasp:dependency-check-gradle:5.0.0-M3.1'
+    implementation 'org.owasp:dependency-check-gradle:5.2.1'
 }
 
 gradlePlugin {
@@ -7,6 +7,10 @@ gradlePlugin {
         securityPlugin {
             id = 'io.beekeeper.gradle.plugins.security'
             implementationClass = 'io.beekeeper.gradle.security.SecurityPlugin'
+        }
+        patchVulnerableLibrariesPlugin {
+            id = 'io.beekeeper.gradle.plugins.security.patcher'
+            implementationClass = 'io.beekeeper.gradle.security.PatchVulnerableLibrariesPlugin'
         }
     }
 }
@@ -20,7 +24,14 @@ pluginBundle {
         securityPlugin {
             id = 'io.beekeeper.gradle.plugins.security'
             displayName = 'Beekeeper Security Check'
-            description = 'Ensures that there are no security problems with the code base'
+            description = 'Ensures that there are no security problems with the code base.'
+            website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+        }
+
+        patchVulnerableLibrariesPlugin {
+            id = 'io.beekeeper.gradle.plugins.security.patcher'
+            displayName = 'Patcher for known security vulnerabilities'
+            description = 'Enables libraries with CVEs to be patched in one place.'
             website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
         }
     }
