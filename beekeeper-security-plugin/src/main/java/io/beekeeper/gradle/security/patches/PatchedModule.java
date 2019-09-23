@@ -25,7 +25,7 @@ public class PatchedModule {
 
     public boolean matches(ModuleVersionSelector moduleVersionSelector) {
         return group.equals(moduleVersionSelector.getGroup())
-                && name.equals(moduleVersionSelector.getName());
+            && name.equals(moduleVersionSelector.getName());
     }
 
     public void patch(DependencyResolveDetails details) {
