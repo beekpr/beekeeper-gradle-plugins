@@ -1,7 +1,10 @@
-package io.beekeeper.gradle.security.patches;
+package io.beekeeper.gradle.security;
 
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+
+import io.beekeeper.gradle.security.patches.PatchedModuleResolver;
+import io.beekeeper.gradle.security.patches.PatchedModules;
 
 public class PatchVulnerableLibrariesPlugin implements Plugin<Project> {
 

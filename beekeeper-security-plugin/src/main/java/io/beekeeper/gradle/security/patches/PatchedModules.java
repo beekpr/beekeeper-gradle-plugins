@@ -6,7 +6,7 @@ import java.util.Collections;
 
 public class PatchedModules {
 
-    static final Collection<PatchedModule> ALL = Collections.unmodifiableCollection(
+    public static final Collection<PatchedModule> ALL = Collections.unmodifiableCollection(
         Arrays.asList(
             new PatchedModule(
                     "com.fasterxml.jackson.core",
