@@ -1,0 +1,31 @@
+dependencies {
+    implementation "com.github.ben-manes:gradle-versions-plugin:0.27.0"
+}
+
+gradlePlugin {
+    plugins {
+        dependencyUpdatesPlugin {
+            id = 'io.beekeeper.gradle.plugins.dependency-updates'
+            implementationClass = 'io.beekeeper.gradle.dependency.DependencyUpdatesCheckPlugin'
+        }
+    }
+}
+
+pluginBundle {
+    vcsUrl = 'https://github.com/beekpr/beekeeper-gradle-plugins/'
+    tags = ['beekeeper']
+    website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+
+    plugins {
+        dependencyUpdatesPlugin {
+            id = 'io.beekeeper.gradle.plugins.dependency-updates'
+            displayName = 'Beekeeper Dependency Updates Checker'
+            description = 'Scan dependencies in you project and check if there are new verions available.'
+            website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+        }
+    }
+
+    mavenCoordinates {
+        groupId = project.group
+    }
+}
