@@ -26,7 +26,7 @@ class DependencyUpdatesCheckPluginTest extends Specification {
         """
     }
 
-    def "it should apply the spotbugs plugin"() {
+    def "it should apply the version plugin"() {
         when:
         BuildResult result = runner.withArguments('tasks', '--all').build()
 
