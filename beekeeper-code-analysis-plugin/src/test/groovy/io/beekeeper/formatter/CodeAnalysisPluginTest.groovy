@@ -3,7 +3,6 @@ package io.beekeeper.formatter
 import io.beekeeper.gradle.code.CodeAnalysisPlugin
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
-import org.gradle.testkit.runner.TaskOutcome
 import org.junit.Rule
 
 import io.beekeeper.gradle.testing.GradleWorkspace

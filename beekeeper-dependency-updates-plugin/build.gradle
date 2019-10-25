@@ -6,7 +6,7 @@ gradlePlugin {
     plugins {
         dependencyUpdatesPlugin {
             id = 'io.beekeeper.gradle.plugins.dependency-updates'
-            implementationClass = 'io.beekeeper.gradle.dependency.DependencyUpdatesCheckPlugin'
+            implementationClass = 'io.beekeeper.gradle.dependencies.DependencyUpdatesCheckPlugin'
         }
     }
 }
