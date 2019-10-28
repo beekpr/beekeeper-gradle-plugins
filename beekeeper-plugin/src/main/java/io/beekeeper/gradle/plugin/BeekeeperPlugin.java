@@ -1,5 +1,6 @@
 package io.beekeeper.gradle.plugin;
 
+import io.beekeeper.gradle.dependencies.DependencyUpdatesCheckPlugin;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
@@ -47,6 +48,7 @@ public class BeekeeperPlugin implements Plugin<Project> {
         project.getPluginManager().apply(SecurityPlugin.class);
         project.getPluginManager().apply(PatchVulnerableLibrariesPlugin.class);
         project.getPluginManager().apply(TestingPlugin.class);
+        project.getPluginManager().apply(DependencyUpdatesCheckPlugin.class);
 
         for (Project subproject : project.getSubprojects()) {
             applyPlugins(subproject);

@@ -1,14 +1,12 @@
-package io.beekeeper.formatter
+package io.beekeeper.gradle.dependencies
 
-import io.beekeeper.gradle.code.CodeAnalysisPlugin
+import io.beekeeper.gradle.testing.GradleWorkspace
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
-
-import io.beekeeper.gradle.testing.GradleWorkspace
 import spock.lang.Specification
 
-class CodeAnalysisPluginTest extends Specification {
+class DependencyUpdatesCheckPluginTest extends Specification {
 
     @Rule
     GradleWorkspace workspace
@@ -23,16 +21,16 @@ class CodeAnalysisPluginTest extends Specification {
         workspace.buildFile << """
         plugins {
             id 'java'
-            id '${CodeAnalysisPlugin.IDENTIFIER}'
+            id '${DependencyUpdatesCheckPlugin.IDENTIFIER}'
         }
         """
     }
 
-    def "it should apply the spotbugs plugin"() {
+    def "it should apply the version plugin"() {
         when:
         BuildResult result = runner.withArguments('tasks', '--all').build()
 
         then:
-        result.output.contains("spotbugsMain")
+        result.output.contains("dependencyUpdates")
     }
 }
