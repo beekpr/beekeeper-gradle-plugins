@@ -1,5 +1,5 @@
 dependencies {
-    implementation group: 'com.diffplug.spotless', name: 'spotless-plugin-gradle', version: '3.17.0'
+    implementation group: 'com.diffplug.spotless', name: 'spotless-plugin-gradle', version: '3.26.0'
 }
 
 gradlePlugin {
