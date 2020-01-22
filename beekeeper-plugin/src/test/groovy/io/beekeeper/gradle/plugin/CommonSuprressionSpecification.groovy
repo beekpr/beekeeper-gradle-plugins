@@ -43,26 +43,26 @@ class CommonSuprressionSpecification extends Specification {
     void setUpBuildGradle(boolean useCommonSuppression){
         buildFile << """
 
-   
+
         plugins {
             id '${BeekeeperPlugin.IDENTIFIER}'
         }
         apply plugin: 'java'
-        
+
           repositories {
             mavenCentral()
         }
-        
+
         dependencies {
             compile 'com.rabbitmq:amqp-client:5.7.3'
         }
-        
+
         BeekeeperSecurityExtension{
             applyCommonSuppressions ${useCommonSuppression}
         }
-        
-        
-          
+
+
+
         """
     }
 
