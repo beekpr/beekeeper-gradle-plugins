@@ -28,11 +28,11 @@ public class SecurityPlugin implements Plugin<Project> {
 
         DependencyCheckExtension config = project.getExtensions().getByType(DependencyCheckExtension.class);
         config.setFormats(
-                Arrays.asList(
-                        HTML,
-                        XML,
-                        JSON
-                )
+            Arrays.asList(
+                HTML,
+                XML,
+                JSON
+            )
         );
 
         project.getExtensions().add(BeekeeperSecurityExtension.class.getSimpleName(), new BeekeeperSecurityExtension());
@@ -42,11 +42,13 @@ public class SecurityPlugin implements Plugin<Project> {
     }
 
     private void applyCommonSuppressionIfNeeded(Project project) {
-        final BeekeeperSecurityExtension beekeeperSecurityExtension = project.getExtensions().getByType(BeekeeperSecurityExtension.class);
+        final BeekeeperSecurityExtension beekeeperSecurityExtension = project.getExtensions()
+            .getByType(BeekeeperSecurityExtension.class);
         if (!beekeeperSecurityExtension.applyCommonSuppressions) {
             return;
         }
-        final DependencyCheckExtension dependencyCheckExtension = project.getExtensions().getByType(DependencyCheckExtension.class);
+        final DependencyCheckExtension dependencyCheckExtension = project.getExtensions()
+            .getByType(DependencyCheckExtension.class);
         final List<String> suppressionFiles = dependencyCheckExtension.getSuppressionFiles();
 
         final String pathToSuppressionFile = getPathToCommonSuppressionFile(project);
@@ -59,10 +61,13 @@ public class SecurityPlugin implements Plugin<Project> {
             try {
                 final JarURLConnection urlConnection;
                 urlConnection = (JarURLConnection) resource.openConnection();
-                final File file = action.getResources().getText().fromArchiveEntry(urlConnection.getJarFileURL().getFile(), urlConnection.getEntryName()).asFile();
+                final File file = action.getResources()
+                    .getText()
+                    .fromArchiveEntry(urlConnection.getJarFileURL().getFile(), urlConnection.getEntryName())
+                    .asFile();
                 return file.getAbsolutePath();
             } catch (IOException e) {
-                throw new IllegalArgumentException("Unable to set up common suppression file",e);
+                throw new IllegalArgumentException("Unable to set up common suppression file", e);
             }
         } else {
             throw new IllegalArgumentException("Unable to set up common suppression file");
