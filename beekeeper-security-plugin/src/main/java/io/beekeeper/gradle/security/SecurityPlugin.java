@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.owasp.dependencycheck.gradle.DependencyCheckPlugin;
@@ -20,6 +21,9 @@ import org.owasp.dependencycheck.gradle.extension.DependencyCheckExtension;
 public class SecurityPlugin implements Plugin<Project> {
 
     public static final String DEPENDENCY_CHECK_COMMON_SUPPRESSION_PATH = "/dependency-check-common-suppression.xml";
+    public static final String BEEKEEPER_PLUGIN_EXTENSION = StringUtils.uncapitalize(
+        BeekeeperSecurityExtension.class.getSimpleName()
+    );
     public static String IDENTIFIER = "io.beekeeper.gradle.plugins.security";
 
     @Override
@@ -35,7 +39,7 @@ public class SecurityPlugin implements Plugin<Project> {
             )
         );
 
-        project.getExtensions().add(BeekeeperSecurityExtension.class.getSimpleName(), new BeekeeperSecurityExtension());
+        project.getExtensions().add(BEEKEEPER_PLUGIN_EXTENSION, new BeekeeperSecurityExtension());
         project.afterEvaluate(action -> {
             applyCommonSuppressionIfNeeded(action);
         });
@@ -69,8 +73,12 @@ public class SecurityPlugin implements Plugin<Project> {
             } catch (IOException e) {
                 throw new IllegalArgumentException("Unable to set up common suppression file", e);
             }
+        } else if (resource.getProtocol().equals("file")) {
+            return resource.getPath();
         } else {
-            throw new IllegalArgumentException("Unable to set up common suppression file");
+            throw new IllegalArgumentException(
+                    String.format("Unable to set up common suppression file, unknown path: %s", resource)
+            );
 
         }
     }

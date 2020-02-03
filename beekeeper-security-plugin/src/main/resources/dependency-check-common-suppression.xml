@@ -16,15 +16,6 @@
     </suppress>
     <suppress>
         <notes><![CDATA[
-   Suppress RabbitMQ issue since:
-        1) it's server related and this is just a client library
-        2) it doesn't affect us
-   ]]></notes>
-        <packageUrl regex="true">^pkg:maven/com\.rabbitmq/amqp\-client@.*$</packageUrl>
-        <cve>CVE-2018-1279</cve>
-    </suppress>
-    <suppress>
-        <notes><![CDATA[
    Suppressing some weird shit, those CVEs don't look relevant at all to this package
    file name: liquibase-groovy-dsl-2.1.0.jar
    ]]></notes>
