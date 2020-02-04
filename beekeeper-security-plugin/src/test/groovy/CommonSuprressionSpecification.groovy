@@ -1,5 +1,4 @@
-package io.beekeeper.gradle.plugin
-
+import io.beekeeper.gradle.security.SecurityPlugin
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
@@ -37,7 +36,7 @@ class CommonSuprressionSpecification extends Specification {
         BuildResult result = runner.withArguments('dependencyCheckAnalyze').build()
 
         then:
-        result.output.contains("Found 1 vulnerabilities")
+        result.output.contains("Found 4 vulnerabilities")
     }
 
     void setUpBuildGradle(boolean useCommonSuppression){
@@ -45,7 +44,7 @@ class CommonSuprressionSpecification extends Specification {
 
 
         plugins {
-            id '${BeekeeperPlugin.IDENTIFIER}'
+            id '${SecurityPlugin.IDENTIFIER}'
         }
         apply plugin: 'java'
 
@@ -54,10 +53,12 @@ class CommonSuprressionSpecification extends Specification {
         }
 
         dependencies {
-            compile 'com.rabbitmq:amqp-client:5.7.3'
+            compile "com.rabbitmq:amqp-client:5.7.3"
+            compile "org.liquibase:liquibase-groovy-dsl:2.1.0"
+            compile "org.codehaus.groovy:groovy-sql:2.4.12"
         }
 
-        BeekeeperSecurityExtension{
+        beekeeperSecurityExtension{
             applyCommonSuppressions ${useCommonSuppression}
         }
 
