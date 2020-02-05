@@ -1,6 +1,6 @@
 plugins {
     id "com.gradle.plugin-publish" version "0.10.1" apply false
-    id "io.beekeeper.gradle.plugin" version "0.7.11"
+    id "io.beekeeper.gradle.plugin" version "0.7.15"
 }
 
 group = 'io.beekeeper.gradle'
