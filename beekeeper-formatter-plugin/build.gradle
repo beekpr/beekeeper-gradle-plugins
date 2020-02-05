@@ -1,6 +1,7 @@
 dependencies {
     implementation group: 'com.diffplug.spotless', name: 'spotless-plugin-gradle', version: '3.27.1'
     implementation group: 'com.diffplug.durian', name: 'durian-io', version: '1.2.0'
+    implementation project(':beekeeper-common')
 }
 
 gradlePlugin {

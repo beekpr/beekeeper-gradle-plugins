@@ -91,18 +91,24 @@ public class FormatterPlugin implements Plugin<Project> {
     }
 
     private void createFormatTask(Project project) {
-        project.getTasks().create("extractBeekeeperFormattingConfig", ExtractResourceTask.class, (task) -> {
-            task.setResourcePath(JAVA_FORMATTING_RULES_RELATIVE_PATH);
-            task.setDestination(getJavaRulesPath(project));
-        });
+        project.getTasks()
+            .create(
+                "extractBeekeeperFormattingConfig",
+                io.beekeeper.gradle.common.ExtractResourceTask.class,
+                (task) -> {
+                    task.setResourcePath(JAVA_FORMATTING_RULES_RELATIVE_PATH);
+                    task.setDestination(getJavaRulesPath(project));
+                });
 
-        // Make the spotless tasks dependent on the config extraction task,
-        // so they can reach the config files
-        project.getTasksByName("spotlessCheck", true).forEach(t -> t.dependsOn("extractBeekeeperFormattingConfig"));
-        project.getTasksByName("spotlessApply", true).forEach(t -> t.dependsOn("extractBeekeeperFormattingConfig"));
-    }
+                // Make the spotless tasks dependent on the config extraction task,
+                // so they can reach the config files
+                project.getTasksByName("spotlessCheck", true).forEach(t -> t.dependsOn(
+                    "extractBeekeeperFormattingConfig"));
+                    project.getTasksByName("spotlessApply", true).forEach(t -> t.dependsOn(
+                        "extractBeekeeperFormattingConfig"));
+                        }
 
-    private String getJavaRulesPath(Project project) {
+                        private String getJavaRulesPath(Project project) {
         return Paths.get(project.getBuildDir().getAbsolutePath(), JAVA_FORMATTING_RULES_RELATIVE_PATH).toString();
     }
 }
