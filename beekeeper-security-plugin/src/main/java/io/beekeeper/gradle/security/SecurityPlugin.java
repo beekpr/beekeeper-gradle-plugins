@@ -1,17 +1,19 @@
 
 package io.beekeeper.gradle.security;
 
+import static org.owasp.dependencycheck.gradle.DependencyCheckPlugin.AGGREGATE_TASK;
+import static org.owasp.dependencycheck.gradle.DependencyCheckPlugin.ANALYZE_TASK;
 import static org.owasp.dependencycheck.reporting.ReportGenerator.Format.HTML;
 import static org.owasp.dependencycheck.reporting.ReportGenerator.Format.JSON;
 import static org.owasp.dependencycheck.reporting.ReportGenerator.Format.XML;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.JarURLConnection;
-import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
+import io.beekeeper.gradle.common.ExtractResourceTask;
 import org.apache.commons.lang3.StringUtils;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -20,15 +22,20 @@ import org.owasp.dependencycheck.gradle.extension.DependencyCheckExtension;
 
 public class SecurityPlugin implements Plugin<Project> {
 
-    public static final String DEPENDENCY_CHECK_COMMON_SUPPRESSION_PATH = "/dependency-check-common-suppression.xml";
+
     public static final String BEEKEEPER_PLUGIN_EXTENSION = StringUtils.uncapitalize(
         BeekeeperSecurityExtension.class.getSimpleName()
+
     );
+
+    public static final String DEPENDENCY_CHECK_COMMON_SUPPRESSION_PATH = "dependency-check-common-suppression.xml";
+
     public static String IDENTIFIER = "io.beekeeper.gradle.plugins.security";
 
     @Override
     public void apply(Project project) {
         project.getPluginManager().apply(DependencyCheckPlugin.class);
+
 
         DependencyCheckExtension config = project.getExtensions().getByType(DependencyCheckExtension.class);
         config.setFormats(
@@ -41,46 +48,44 @@ public class SecurityPlugin implements Plugin<Project> {
 
         project.getExtensions().add(BEEKEEPER_PLUGIN_EXTENSION, new BeekeeperSecurityExtension());
         project.afterEvaluate(action -> {
-            applyCommonSuppressionIfNeeded(action);
+            final BeekeeperSecurityExtension beekeeperSecurityExtension = project.getExtensions()
+                .getByType(BeekeeperSecurityExtension.class);
+            if (!beekeeperSecurityExtension.applyCommonSuppressions) {
+                return;
+            }
+            prepareCommonSuppression(action);
         });
     }
 
-    private void applyCommonSuppressionIfNeeded(Project project) {
-        final BeekeeperSecurityExtension beekeeperSecurityExtension = project.getExtensions()
-            .getByType(BeekeeperSecurityExtension.class);
-        if (!beekeeperSecurityExtension.applyCommonSuppressions) {
-            return;
-        }
-        final DependencyCheckExtension dependencyCheckExtension = project.getExtensions()
+    private void prepareCommonSuppression(Project project) {
+        final String suppressionPathInBuildDir = Paths.get(
+            project.getBuildDir().getAbsolutePath(),
+            DEPENDENCY_CHECK_COMMON_SUPPRESSION_PATH
+        ).toString();
+
+        prepareAppendCommonSuppressionTask(project, suppressionPathInBuildDir);
+        appendCommonSuppression(project, suppressionPathInBuildDir);
+    }
+
+    private void prepareAppendCommonSuppressionTask(Project project, String suppressionPathInBuildDir) {
+        final String appendCommonSuppression = "appendCommonSuppression";
+        project.getTasks().create(appendCommonSuppression, ExtractResourceTask.class, task -> {
+            task.setDestination(suppressionPathInBuildDir);
+            task.setResourcePath(DEPENDENCY_CHECK_COMMON_SUPPRESSION_PATH);
+        });
+
+        Stream.of(ANALYZE_TASK, AGGREGATE_TASK)
+            .map(owaspTaskName -> project.getTasksByName(owaspTaskName, true))
+            .flatMap(Collection::stream)
+            .forEach(owaspTask -> owaspTask.dependsOn(appendCommonSuppression));
+    }
+
+    private void appendCommonSuppression(Project action, String commonSuppressionPath) {
+        final DependencyCheckExtension dependencyCheckExtension = action.getExtensions()
             .getByType(DependencyCheckExtension.class);
         final List<String> suppressionFiles = dependencyCheckExtension.getSuppressionFiles();
 
-        final String pathToSuppressionFile = getPathToCommonSuppressionFile(project);
-        suppressionFiles.add(pathToSuppressionFile);
-    }
-
-    private String getPathToCommonSuppressionFile(Project action) {
-        final URL resource = SecurityPlugin.class.getResource(DEPENDENCY_CHECK_COMMON_SUPPRESSION_PATH);
-        if (resource.getProtocol().equals("jar")) {
-            try {
-                final JarURLConnection urlConnection;
-                urlConnection = (JarURLConnection) resource.openConnection();
-                final File file = action.getResources()
-                    .getText()
-                    .fromArchiveEntry(urlConnection.getJarFileURL().getFile(), urlConnection.getEntryName())
-                    .asFile();
-                return file.getAbsolutePath();
-            } catch (IOException e) {
-                throw new IllegalArgumentException("Unable to set up common suppression file", e);
-            }
-        } else if (resource.getProtocol().equals("file")) {
-            return resource.getPath();
-        } else {
-            throw new IllegalArgumentException(
-                    String.format("Unable to set up common suppression file, unknown path: %s", resource)
-            );
-
-        }
+        suppressionFiles.add(commonSuppressionPath);
     }
 
     public static class BeekeeperSecurityExtension {
