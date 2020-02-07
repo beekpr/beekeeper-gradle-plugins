@@ -13,7 +13,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
-import io.beekeeper.gradle.common.ExtractResourceTask;
 import org.apache.commons.lang3.StringUtils;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -75,9 +74,9 @@ public class SecurityPlugin implements Plugin<Project> {
         });
 
         Stream.of(ANALYZE_TASK, AGGREGATE_TASK)
-            .map(owaspTaskName -> project.getTasksByName(owaspTaskName, true))
-            .flatMap(Collection::stream)
-            .forEach(owaspTask -> owaspTask.dependsOn(appendCommonSuppression));
+                .map(owaspTaskName -> project.getTasksByName(owaspTaskName, true))
+                .flatMap(Collection::stream)
+                .forEach(owaspTask -> owaspTask.dependsOn(appendCommonSuppression));
     }
 
     private void appendCommonSuppression(Project action, String commonSuppressionPath) {
