@@ -74,9 +74,9 @@ public class SecurityPlugin implements Plugin<Project> {
         });
 
         Stream.of(ANALYZE_TASK, AGGREGATE_TASK)
-                .map(owaspTaskName -> project.getTasksByName(owaspTaskName, true))
-                .flatMap(Collection::stream)
-                .forEach(owaspTask -> owaspTask.dependsOn(appendCommonSuppression));
+            .map(owaspTaskName -> project.getTasksByName(owaspTaskName, true))
+            .flatMap(Collection::stream)
+            .forEach(owaspTask -> owaspTask.dependsOn(appendCommonSuppression));
     }
 
     private void appendCommonSuppression(Project action, String commonSuppressionPath) {
