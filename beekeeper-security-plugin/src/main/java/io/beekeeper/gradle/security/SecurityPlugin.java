@@ -13,7 +13,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
-import io.beekeeper.gradle.common.ExtractResourceTask;
 import org.apache.commons.lang3.StringUtils;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
