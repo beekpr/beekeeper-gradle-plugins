@@ -1,6 +1,8 @@
 package io.beekeeper.gradle.code;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -13,7 +15,9 @@ import com.github.spotbugs.SpotBugsTask;
 
 public class CodeAnalysisPlugin implements Plugin<Project> {
 
-    public static String IDENTIFIER = "io.beekeeper.gradle.plugins.code-analysis-check";
+    public static final String IDENTIFIER = "io.beekeeper.gradle.plugins.code-analysis-check";
+    private static final String SPOT_BUGS_VERSION = "4.0.0";
+    private static final String FIND_SEC_BUGS_VERSION = "1.10.1";
 
     @Override
     public void apply(Project project) {
@@ -21,12 +25,20 @@ public class CodeAnalysisPlugin implements Plugin<Project> {
             project.getPluginManager().apply(SpotBugsPlugin.class);
 
             SpotBugsExtension config = project.getExtensions().getByType(SpotBugsExtension.class);
-            config.setToolVersion("3.1.12");
+            config.setToolVersion(SPOT_BUGS_VERSION);
 
             SourceSet main = project.getConvention()
                 .getPlugin(JavaPluginConvention.class)
                 .getSourceSets()
                 .getByName("main");
+
+            Map<String, String> findSecBugsDependency = new HashMap<>();
+            findSecBugsDependency.put("group", "com.h3xstream.findsecbugs");
+            findSecBugsDependency.put("name", "findsecbugs-plugin");
+            findSecBugsDependency.put("version", FIND_SEC_BUGS_VERSION);
+
+            project.getDependencies().add("spotbugsPlugins", findSecBugsDependency);
+
             config.setSourceSets(Collections.singleton(main));
         });
 
