@@ -1,5 +1,5 @@
 dependencies {
-    implementation 'org.owasp:dependency-check-gradle:5.3.0'
+    implementation 'org.owasp:dependency-check-gradle:5.3.2.1'
 }
 
 gradlePlugin {
