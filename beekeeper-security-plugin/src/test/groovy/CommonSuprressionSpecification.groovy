@@ -36,7 +36,7 @@ class CommonSuprressionSpecification extends Specification {
         BuildResult result = runner.withArguments('dependencyCheckAnalyze').build()
 
         then:
-        result.output.contains("Found 4 vulnerabilities")
+        !result.output.contains("Found 0 vulnerabilities")
     }
 
     void setUpBuildGradle(boolean useCommonSuppression){
