@@ -5,7 +5,7 @@ import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 
-class CommonSuprressionSpecification extends Specification {
+class SpotbugIsSkippedSpecification extends Specification {
 
     @Rule
     TemporaryFolder dir
@@ -17,7 +17,7 @@ class CommonSuprressionSpecification extends Specification {
             .withPluginClasspath()
     }
 
-    def "it should not report suppressed vulnerability"() {
+    def "it should not report spotbug vulnerability"() {
         given:
         setUpBuildGradle(true)
 
@@ -28,7 +28,8 @@ class CommonSuprressionSpecification extends Specification {
         result.output.contains("Found 0 vulnerabilities")
     }
 
-    def "it should report suppressed vulnerability when not using common suppression"() {
+    def "it should report spotbug vulnerability with no supression"() {
+        //NOTE: this test may start failing once spotbugs has no vulnerabilities
         given:
         setUpBuildGradle(false)
 
@@ -45,6 +46,8 @@ class CommonSuprressionSpecification extends Specification {
 
         plugins {
             id '${SecurityPlugin.IDENTIFIER}'
+            id "com.github.spotbugs" version "2.0.0"
+
         }
         apply plugin: 'java'
 
@@ -52,17 +55,9 @@ class CommonSuprressionSpecification extends Specification {
             mavenCentral()
         }
 
-        dependencies {
-            compile "com.rabbitmq:amqp-client:5.7.3"
-            compile "org.liquibase:liquibase-groovy-dsl:2.1.0"
-            compile "org.codehaus.groovy:groovy-sql:2.4.12"
-        }
-
         beekeeperSecurityExtension{
             applyCommonSuppressions ${useCommonSuppression}
         }
-
-
 
         """
     }

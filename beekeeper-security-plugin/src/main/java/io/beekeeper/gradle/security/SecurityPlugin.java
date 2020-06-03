@@ -52,6 +52,7 @@ public class SecurityPlugin implements Plugin<Project> {
             if (!beekeeperSecurityExtension.applyCommonSuppressions) {
                 return;
             }
+            skipSpotbugs(action);
             prepareCommonSuppression(action);
         });
     }
@@ -93,6 +94,13 @@ public class SecurityPlugin implements Plugin<Project> {
         public void applyCommonSuppressions(boolean applyCommonSuppressions) {
             this.applyCommonSuppressions = applyCommonSuppressions;
         }
+    }
+
+    private void skipSpotbugs(Project action) {
+        final DependencyCheckExtension dependencyCheckExtension = action.getExtensions()
+            .getByType(DependencyCheckExtension.class);
+
+        dependencyCheckExtension.getSkipConfigurations().add("spotbugs");
     }
 }
 
