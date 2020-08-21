@@ -28,6 +28,7 @@ public class SecurityPlugin implements Plugin<Project> {
     );
 
     public static final String DEPENDENCY_CHECK_COMMON_SUPPRESSION_PATH = "dependency-check-common-suppression.xml";
+    public static final String DEPENDENCY_CHECK_QUARKUS_SUPPRESSION_PATH = "dependency-check-quarkus-suppression.xml";
 
     public static String IDENTIFIER = "io.beekeeper.gradle.plugins.security";
 
@@ -53,25 +54,31 @@ public class SecurityPlugin implements Plugin<Project> {
                 return;
             }
             skipSpotbugs(action);
-            prepareCommonSuppression(action);
+            prepareCommonSuppression(action, DEPENDENCY_CHECK_COMMON_SUPPRESSION_PATH, "common");
+            prepareCommonSuppression(action, DEPENDENCY_CHECK_QUARKUS_SUPPRESSION_PATH, "quarkus");
         });
     }
 
-    private void prepareCommonSuppression(Project project) {
+    private void prepareCommonSuppression(Project project, String suppressionFileName, String groupName) {
         final String suppressionPathInBuildDir = Paths.get(
             project.getBuildDir().getAbsolutePath(),
-            DEPENDENCY_CHECK_COMMON_SUPPRESSION_PATH
+            suppressionFileName
         ).toString();
 
-        prepareAppendCommonSuppressionTask(project, suppressionPathInBuildDir);
+        prepareAppendCommonSuppressionTask(project, suppressionPathInBuildDir, suppressionFileName, groupName);
         appendCommonSuppression(project, suppressionPathInBuildDir);
     }
 
-    private void prepareAppendCommonSuppressionTask(Project project, String suppressionPathInBuildDir) {
-        final String appendCommonSuppression = "appendCommonSuppression";
+    private void prepareAppendCommonSuppressionTask(
+            Project project,
+            String suppressionPathInBuildDir,
+            String suppressionFileName,
+            String groupName
+    ) {
+        final String appendCommonSuppression = String.format("appendSuppressions%s", groupName);
         project.getTasks().create(appendCommonSuppression, ExtractResourceTask.class, task -> {
             task.setDestination(suppressionPathInBuildDir);
-            task.setResourcePath(DEPENDENCY_CHECK_COMMON_SUPPRESSION_PATH);
+            task.setResourcePath(suppressionFileName);
         });
 
         Stream.of(ANALYZE_TASK, AGGREGATE_TASK)
