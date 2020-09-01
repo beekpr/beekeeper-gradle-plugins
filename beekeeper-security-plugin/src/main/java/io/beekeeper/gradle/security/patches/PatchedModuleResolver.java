@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.gradle.api.artifacts.ModuleVersionSelector;
 
 public class PatchedModuleResolver {
@@ -20,6 +21,7 @@ public class PatchedModuleResolver {
     }
 
     private static class Key {
+        @SuppressFBWarnings("UPM_UNCALLED_PRIVATE_METHOD")
         private static String from(PatchedModule module) {
             return from(module.group, module.name);
         }

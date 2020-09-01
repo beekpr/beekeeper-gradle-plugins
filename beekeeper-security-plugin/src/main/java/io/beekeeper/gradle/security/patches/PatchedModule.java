@@ -1,5 +1,6 @@
 package io.beekeeper.gradle.security.patches;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.gradle.api.artifacts.DependencyResolveDetails;
 import org.gradle.api.artifacts.ModuleVersionSelector;
 
@@ -49,7 +50,7 @@ public class PatchedModule {
         return patchedVersion.compareTo(originalVersion) < 0;
     }
 
-
+    @SuppressFBWarnings("EQ_COMPARETO_USE_OBJECT_EQUALS")
     public static class SemVer implements Comparable {
         private final List<String> elements;
 
