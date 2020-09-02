@@ -8,6 +8,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.Task;
@@ -28,6 +29,7 @@ public class CheckVersionTask extends DefaultTask implements Task {
     private String url;
 
     @TaskAction
+    @SuppressFBWarnings("RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE")
     public void check() throws MalformedURLException, IOException {
         try (InputStream stream = new URL(this.url).openStream()) {
             String requiredVersionString = read(stream).trim();
