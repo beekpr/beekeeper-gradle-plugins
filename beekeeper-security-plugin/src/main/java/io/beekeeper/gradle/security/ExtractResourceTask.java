@@ -1,5 +1,6 @@
 package io.beekeeper.gradle.security;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Task;
 import org.gradle.api.tasks.Input;
@@ -38,6 +39,7 @@ public class ExtractResourceTask extends DefaultTask implements Task {
     }
 
     @TaskAction
+    @SuppressFBWarnings("RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE")
     public void extract() throws IOException {
 
         try (final InputStream stream = ExtractResourceTask.class.getClassLoader().getResourceAsStream(resourcePath)) {
