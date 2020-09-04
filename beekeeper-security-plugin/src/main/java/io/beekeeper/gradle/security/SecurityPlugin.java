@@ -32,7 +32,7 @@ public class SecurityPlugin implements Plugin<Project> {
     public static final String DEPENDENCY_CHECK_QUARKUS_SUPPRESSION_PATH = "dependency-check-quarkus-suppression.xml";
 
     public static String IDENTIFIER = "io.beekeeper.gradle.plugins.security";
-    private final String QUARKUS_DEPENDENCY_GROUP = "io.quarkus";
+    private static final String QUARKUS_DEPENDENCY_GROUP = "io.quarkus";
 
     @Override
     public void apply(Project project) {
