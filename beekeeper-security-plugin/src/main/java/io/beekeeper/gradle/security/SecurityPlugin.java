@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 import org.apache.commons.lang3.StringUtils;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.api.artifacts.Configuration;
 import org.owasp.dependencycheck.gradle.DependencyCheckPlugin;
 import org.owasp.dependencycheck.gradle.extension.DependencyCheckExtension;
 
@@ -31,6 +32,7 @@ public class SecurityPlugin implements Plugin<Project> {
     public static final String DEPENDENCY_CHECK_QUARKUS_SUPPRESSION_PATH = "dependency-check-quarkus-suppression.xml";
 
     public static String IDENTIFIER = "io.beekeeper.gradle.plugins.security";
+    private final String QUARKUS_DEPENDENCY_GROUP = "io.quarkus";
 
     @Override
     public void apply(Project project) {
@@ -55,7 +57,9 @@ public class SecurityPlugin implements Plugin<Project> {
             }
             skipSpotbugs(action);
             prepareCommonSuppression(action, DEPENDENCY_CHECK_COMMON_SUPPRESSION_PATH, "common");
-            prepareCommonSuppression(action, DEPENDENCY_CHECK_QUARKUS_SUPPRESSION_PATH, "quarkus");
+            if (isQuarkusProject(project)) {
+                prepareCommonSuppression(action, DEPENDENCY_CHECK_QUARKUS_SUPPRESSION_PATH, "quarkus");
+            }
         });
     }
 
@@ -93,6 +97,15 @@ public class SecurityPlugin implements Plugin<Project> {
         final List<String> suppressionFiles = dependencyCheckExtension.getSuppressionFiles();
 
         suppressionFiles.add(commonSuppressionPath);
+    }
+
+    private boolean isQuarkusProject(Project project) {
+        return project
+            .getConfigurations()
+            .stream()
+            .map(Configuration::getAllDependencies)
+            .flatMap(Collection::stream)
+            .anyMatch(d -> QUARKUS_DEPENDENCY_GROUP.equals(d.getGroup()));
     }
 
     public static class BeekeeperSecurityExtension {
