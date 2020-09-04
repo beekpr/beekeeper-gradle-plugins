@@ -5,7 +5,7 @@ import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 
-class CommonSuprressionSpecification extends Specification {
+class SuppressionSpecification extends Specification {
 
     @Rule
     TemporaryFolder dir
@@ -56,6 +56,8 @@ class CommonSuprressionSpecification extends Specification {
             compile "com.rabbitmq:amqp-client:5.7.3"
             compile "org.liquibase:liquibase-groovy-dsl:2.1.0"
             compile "org.codehaus.groovy:groovy-sql:2.4.12"
+            compile "io.quarkus:quarkus-resteasy"
+            implementation "io.quarkus:quarkus-kubernetes"
         }
 
         beekeeperSecurityExtension{
