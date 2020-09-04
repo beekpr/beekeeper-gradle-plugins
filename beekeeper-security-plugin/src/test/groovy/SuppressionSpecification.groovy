@@ -26,7 +26,7 @@ class SuppressionSpecification extends Specification {
 
         then:
         result.output.contains("Found 0 vulnerabilities")
-        result.output.contains("appendSuppressionsquarkus")
+        result.output.contains("appendSuppressionsQuarkus")
     }
 
     def "it should report suppressed vulnerability when not using common suppression"() {
@@ -49,7 +49,7 @@ class SuppressionSpecification extends Specification {
 
         then:
         result.output.contains("Found 0 vulnerabilities")
-        !result.output.contains("appendSuppressionsquarkus")
+        !result.output.contains("appendSuppressionsQuarkus")
     }
 
     void setUpBuildGradle(boolean useCommonSuppression){

@@ -56,9 +56,9 @@ public class SecurityPlugin implements Plugin<Project> {
                 return;
             }
             skipSpotbugs(action);
-            prepareCommonSuppression(action, DEPENDENCY_CHECK_COMMON_SUPPRESSION_PATH, "common");
+            prepareCommonSuppression(action, DEPENDENCY_CHECK_COMMON_SUPPRESSION_PATH, "Common");
             if (isQuarkusProject(project)) {
-                prepareCommonSuppression(action, DEPENDENCY_CHECK_QUARKUS_SUPPRESSION_PATH, "quarkus");
+                prepareCommonSuppression(action, DEPENDENCY_CHECK_QUARKUS_SUPPRESSION_PATH, "Quarkus");
             }
         });
     }
