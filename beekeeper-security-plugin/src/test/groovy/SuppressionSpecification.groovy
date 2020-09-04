@@ -26,6 +26,7 @@ class SuppressionSpecification extends Specification {
 
         then:
         result.output.contains("Found 0 vulnerabilities")
+        result.output.contains("appendSuppressionsquarkus")
     }
 
     def "it should report suppressed vulnerability when not using common suppression"() {
@@ -37,6 +38,18 @@ class SuppressionSpecification extends Specification {
 
         then:
         !result.output.contains("Found 0 vulnerabilities")
+    }
+
+    def "it should not suppress Quarkus specific vulnerabilities when no dependency is present"() {
+        given:
+        setUpBuildGradleNoQuarkus(true)
+
+        when:
+        BuildResult result = runner.withArguments('dependencyCheckAnalyze').build()
+
+        then:
+        result.output.contains("Found 0 vulnerabilities")
+        !result.output.contains("appendSuppressionsquarkus")
     }
 
     void setUpBuildGradle(boolean useCommonSuppression){
@@ -58,6 +71,34 @@ class SuppressionSpecification extends Specification {
             compile "org.codehaus.groovy:groovy-sql:2.4.12"
             compile "io.quarkus:quarkus-resteasy"
             implementation "io.quarkus:quarkus-kubernetes"
+        }
+
+        beekeeperSecurityExtension{
+            applyCommonSuppressions ${useCommonSuppression}
+        }
+
+
+
+        """
+    }
+
+    void setUpBuildGradleNoQuarkus(boolean useCommonSuppression){
+        buildFile << """
+
+
+        plugins {
+            id '${SecurityPlugin.IDENTIFIER}'
+        }
+        apply plugin: 'java'
+
+          repositories {
+            mavenCentral()
+        }
+
+        dependencies {
+            compile "com.rabbitmq:amqp-client:5.7.3"
+            compile "org.liquibase:liquibase-groovy-dsl:2.1.0"
+            compile "org.codehaus.groovy:groovy-sql:2.4.12"
         }
 
         beekeeperSecurityExtension{
