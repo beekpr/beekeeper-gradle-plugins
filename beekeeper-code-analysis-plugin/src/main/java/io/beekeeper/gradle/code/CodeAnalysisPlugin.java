@@ -25,7 +25,7 @@ public class CodeAnalysisPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
         project.getPluginManager().withPlugin("java", it -> {
-            if(isQuarkusProject(project)){
+            if (isQuarkusProject(project)) {
                 return;
             }
 
@@ -66,11 +66,11 @@ public class CodeAnalysisPlugin implements Plugin<Project> {
 
     private boolean isQuarkusProject(Project project) {
         return project
-                .getConfigurations()
-                .stream()
-                .map(Configuration::getAllDependencies)
-                .flatMap(Collection::stream)
-                .anyMatch(d -> QUARKUS_DEPENDENCY_GROUP.equals(d.getGroup()));
+            .getConfigurations()
+            .stream()
+            .map(Configuration::getAllDependencies)
+            .flatMap(Collection::stream)
+            .anyMatch(d -> QUARKUS_DEPENDENCY_GROUP.equals(d.getGroup()));
     }
 
 }
