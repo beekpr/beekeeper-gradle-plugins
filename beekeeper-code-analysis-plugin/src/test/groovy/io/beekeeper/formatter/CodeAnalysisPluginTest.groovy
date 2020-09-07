@@ -15,16 +15,21 @@ class CodeAnalysisPluginTest extends Specification {
 
     GradleRunner runner
 
-    def setup(boolean quarkus) {
+    def setupBuild(boolean quarkus) {
         runner = workspace
             .runner
             .withPluginClasspath()
 
-        if (quarkus) {
+        if (!quarkus) {
             workspace.buildFile << """
                     plugins {
                         id 'java'
                         id '${CodeAnalysisPlugin.IDENTIFIER}'
+                    }
+                    apply plugin: 'java'
+
+                    repositories {
+                       mavenCentral()
                     }
                     """
         } else {
@@ -32,6 +37,12 @@ class CodeAnalysisPluginTest extends Specification {
                     plugins {
                         id 'java'
                         id '${CodeAnalysisPlugin.IDENTIFIER}'
+                    }
+
+                    apply plugin: 'java'
+
+                    repositories {
+                      mavenCentral()
                     }
 
                     dependencies {
@@ -45,7 +56,7 @@ class CodeAnalysisPluginTest extends Specification {
 
     def "it should apply the spotbugs plugin"() {
         given:
-        setup(false)
+        setupBuild(false)
 
         when:
         BuildResult result = runner.withArguments('tasks', '--all').build()
@@ -56,12 +67,12 @@ class CodeAnalysisPluginTest extends Specification {
 
     def "it should not apply the spotbugs plugin for Quarkus projects"() {
         given:
-        setup(true)
+        setupBuild(true)
 
         when:
         BuildResult result = runner.withArguments('tasks', '--all').build()
 
         then:
-        result.output.contains("spotbugsMain")
+        !result.output.contains("spotbugsMain")
     }
 }

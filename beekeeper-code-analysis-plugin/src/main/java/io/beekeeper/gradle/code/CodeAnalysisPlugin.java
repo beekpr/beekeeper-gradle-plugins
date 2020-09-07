@@ -66,8 +66,10 @@ public class CodeAnalysisPlugin implements Plugin<Project> {
 
     private boolean isQuarkusProject(Project project) {
         return project
-            .getConfigurations()
+            .getAllprojects()
             .stream()
+            .map(p -> p.getConfigurations())
+            .flatMap(Collection::stream)
             .map(Configuration::getAllDependencies)
             .flatMap(Collection::stream)
             .anyMatch(d -> QUARKUS_DEPENDENCY_GROUP.equals(d.getGroup()));
