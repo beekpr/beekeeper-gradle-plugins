@@ -50,7 +50,7 @@ public class CodeAnalysisPlugin implements Plugin<Project> {
 
     private void configureTasks(Project project) {
         project.getTasks().withType(SpotBugsTask.class, task -> {
-            if(isQuarkusProject(project)) {
+            if (isQuarkusProject(project)) {
                 task.setEnabled(false);
             } else {
                 boolean isJenkins = isJenkins();
@@ -66,10 +66,10 @@ public class CodeAnalysisPlugin implements Plugin<Project> {
 
     private boolean isQuarkusProject(Project project) {
         return project
-                .getConfigurations()
-                .stream()
-                .map(Configuration::getAllDependencies)
-                .flatMap(Collection::stream)
-                .anyMatch(d -> QUARKUS_DEPENDENCY_GROUP.equals(d.getGroup()));
+            .getConfigurations()
+            .stream()
+            .map(Configuration::getAllDependencies)
+            .flatMap(Collection::stream)
+            .anyMatch(d -> QUARKUS_DEPENDENCY_GROUP.equals(d.getGroup()));
     }
 }
