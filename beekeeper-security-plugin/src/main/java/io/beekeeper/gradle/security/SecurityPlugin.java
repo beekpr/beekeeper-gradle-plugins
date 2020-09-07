@@ -100,12 +100,24 @@ public class SecurityPlugin implements Plugin<Project> {
     }
 
     private boolean isQuarkusProject(Project project) {
-        return project
+        boolean hasQuarkusDependencies = project
             .getConfigurations()
             .stream()
             .map(Configuration::getAllDependencies)
             .flatMap(Collection::stream)
             .anyMatch(d -> QUARKUS_DEPENDENCY_GROUP.equals(d.getGroup()));
+
+        if (hasQuarkusDependencies) {
+            return true;
+        }
+
+        for (Project subProject : project.getSubprojects()) {
+            if (isQuarkusProject(subProject)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static class BeekeeperSecurityExtension {
