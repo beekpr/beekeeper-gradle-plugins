@@ -1,11 +1,15 @@
 
 package io.beekeeper.gradle.quarkus;
 
+import org.gradle.api.JavaVersion;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.api.plugins.JavaPluginConvention;
+import org.gradle.api.tasks.compile.JavaCompile;
+import org.gradle.api.tasks.testing.Test;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class QuarkusPlugin implements Plugin<Project> {
 
@@ -13,62 +17,44 @@ public class QuarkusPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
-        addCoreDependencies(project);
+        BeekeeperExtension extension = project.getExtensions().create(BeekeeperExtension.EXTENSION, BeekeeperExtension.class);
 
-        BeekeeperQuarkusExtension extension = project.getExtensions().create("beekeeper-quarkus", BeekeeperQuarkusExtension.class);
+        // Get beekeeperPluginExtension
+        project.getPluginManager().withPlugin("io.quarkus", it -> {
+            project.afterEvaluate(this::applyJava11);
 
-        if (extension.db) {
-            addDbDependencies(project);
+        });
+
+    }
+
+    public static class BeekeeperExtension {
+        static final String EXTENSION = "beekeeperJava";
+
+        boolean java11;
+    }
+
+    private void applyJava11(Project project) {
+        BeekeeperExtension extension = project.getExtensions().getByType(BeekeeperExtension.class);
+
+        if (extension.java11) {
+            JavaCompile compileJava = (JavaCompile) project.getTasks().getByName("compileJava");
+            compileJava.getOptions().setEncoding("UTF-8");
+            compileJava.getOptions().setCompilerArgs(Collections.singletonList("-parameters"));
+
+            JavaCompile compileTestJava = (JavaCompile) project.getTasks().getByName("compileTestJava");
+            compileTestJava.getOptions().setEncoding("UTF-8");
+
+            Test test = (Test) project.getTasks().getByName("test");
+            test.systemProperty(
+                    "systemProperty",
+                    Arrays.asList("java.util.logging.manager", "org.jboss.logmanager.LogManager")
+            );
+
+            JavaPluginConvention java = project.getConvention().getPlugin(JavaPluginConvention.class);
+            java.setSourceCompatibility(JavaVersion.VERSION_11);
+            java.setTargetCompatibility(JavaVersion.VERSION_11);
         }
-        if (extension.rest) {
-            addRestDependencies(project);
-        }
+
     }
-
-    public void addCoreDependencies(Project project) {
-        Map<String, String> dependency = new HashMap<>();
-
-        dependency.put("group", "io.quarkus");
-        dependency.put("name", "quarkus-logging-gelf");
-        project.getDependencies().add("quarkus-logging-gelf", dependency);
-
-        dependency.put("group", "io.quarkus");
-        dependency.put("name", "quarkus-logging-sentry");
-        project.getDependencies().add("quarkus-logging-sentry", dependency);
-
-        dependency.put("group", "org.jboss.slf4j");
-        dependency.put("name", "slf4j-jboss-logging");
-        project.getDependencies().add("slf4j-jboss-logging", dependency);
-    }
-
-    public void addDbDependencies(Project project) {
-        Map<String, String> dependency = new HashMap<>();
-
-        dependency.put("group", "io.quarkus");
-        dependency.put("name", "quarkus-agroal");
-        project.getDependencies().add("quarkus-agroal", dependency);
-
-        dependency.put("group", "io.quarkus");
-        dependency.put("name", "quarkus-jdbc-postgresql");
-        project.getDependencies().add("quarkus-jdbc-postgresql", dependency);
-    }
-
-    public void addRestDependencies(Project project) {
-        Map<String, String> dependency = new HashMap<>();
-
-        dependency.put("group", "io.quarkus");
-        dependency.put("name", "quarkus-resteasy");
-        project.getDependencies().add("quarkus-resteasy", dependency);
-
-        dependency.put("group", "io.quarkus");
-        dependency.put("name", "quarkus-resteasy-jsonb");
-        project.getDependencies().add("quarkus-resteasy-jsonb", dependency);
-    }
-
-    public static class BeekeeperQuarkusExtension {
-        boolean db = true;
-        boolean rest = true;
-    }
-
 }
 

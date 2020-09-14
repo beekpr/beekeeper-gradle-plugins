@@ -5,7 +5,7 @@ gradlePlugin {
     plugins {
         quarkusPlugin {
             id = 'io.beekeeper.gradle.plugins.quarkus'
-            implementationClass = 'io.beekeeper.gradle.security.QuarkusPlugin'
+            implementationClass = 'io.beekeeper.gradle.quarkus.QuarkusPlugin'
         }
     }
 }

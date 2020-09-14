@@ -9,6 +9,7 @@ dependencies {
     implementation project(':beekeeper-formatter-plugin')
     implementation project(':beekeeper-ide-plugin')
     implementation project(':beekeeper-license-check-plugin')
+    implementation project(':beekeeper-quarkus-plugin')
     implementation project(':beekeeper-security-plugin')
     implementation project(':beekeeper-testing-plugin')
     implementation project(':beekeeper-dependency-updates-plugin')
