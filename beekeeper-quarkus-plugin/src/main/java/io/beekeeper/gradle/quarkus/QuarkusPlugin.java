@@ -46,8 +46,8 @@ public class QuarkusPlugin implements Plugin<Project> {
 
             Test test = (Test) project.getTasks().getByName("test");
             test.systemProperty(
-                    "systemProperty",
-                    Arrays.asList("java.util.logging.manager", "org.jboss.logmanager.LogManager")
+                "systemProperty",
+                Arrays.asList("java.util.logging.manager", "org.jboss.logmanager.LogManager")
             );
 
             JavaPluginConvention java = project.getConvention().getPlugin(JavaPluginConvention.class);
