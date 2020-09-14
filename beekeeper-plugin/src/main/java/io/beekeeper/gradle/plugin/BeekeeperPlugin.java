@@ -1,6 +1,7 @@
 package io.beekeeper.gradle.plugin;
 
 import io.beekeeper.gradle.dependencies.DependencyUpdatesCheckPlugin;
+import io.beekeeper.gradle.quarkus.QuarkusDependencies;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
@@ -28,6 +29,7 @@ public class BeekeeperPlugin implements Plugin<Project> {
 
     private void applyExtensions(Project project) {
         pluginExtension = project.getExtensions().create("beekeeper", BeekeeperPluginExtension.class);
+        project.getExtensions().getExtraProperties().set("beekeeperQuarkus", QuarkusDependencies.getDependencies());
     }
 
     private void applyTasks(Project project) {
