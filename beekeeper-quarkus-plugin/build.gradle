@@ -1,0 +1,30 @@
+dependencies {
+}
+
+gradlePlugin {
+    plugins {
+        quarkusPlugin {
+            id = 'io.beekeeper.gradle.plugins.quarkus'
+            implementationClass = 'io.beekeeper.gradle.quarkus.QuarkusPlugin'
+        }
+    }
+}
+
+pluginBundle {
+    vcsUrl = 'https://github.com/beekpr/beekeeper-gradle-plugins/'
+    tags = ['beekeeper']
+    website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+
+    plugins {
+        quarkusPlugin {
+            id = 'io.beekeeper.gradle.plugins.quarkus'
+            displayName = 'Beekeeper Quarkus Plugin'
+            description = 'Include base dependencies for your Quarkus project.'
+            website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+        }
+    }
+
+    mavenCoordinates {
+        groupId = project.group
+    }
+}

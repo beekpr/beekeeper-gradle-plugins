@@ -1,8 +1,10 @@
 package io.beekeeper.gradle.plugin;
 
 import io.beekeeper.gradle.dependencies.DependencyUpdatesCheckPlugin;
+import io.beekeeper.gradle.quarkus.QuarkusDependencies;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import io.beekeeper.gradle.quarkus.QuarkusPlugin;
 
 import io.beekeeper.formatter.FormatterPlugin;
 import io.beekeeper.gradle.code.CodeAnalysisPlugin;
@@ -28,6 +30,7 @@ public class BeekeeperPlugin implements Plugin<Project> {
 
     private void applyExtensions(Project project) {
         pluginExtension = project.getExtensions().create("beekeeper", BeekeeperPluginExtension.class);
+        project.getExtensions().getExtraProperties().set("beekeeperQuarkus", QuarkusDependencies.getDependencies());
     }
 
     private void applyTasks(Project project) {
@@ -45,6 +48,7 @@ public class BeekeeperPlugin implements Plugin<Project> {
         project.getPluginManager().apply(FormatterPlugin.class);
         project.getPluginManager().apply(IdePlugin.class);
         project.getPluginManager().apply(LicenseCheckPlugin.class);
+        project.getPluginManager().apply(QuarkusPlugin.class);
         project.getPluginManager().apply(SecurityPlugin.class);
         project.getPluginManager().apply(PatchVulnerableLibrariesPlugin.class);
         project.getPluginManager().apply(TestingPlugin.class);
