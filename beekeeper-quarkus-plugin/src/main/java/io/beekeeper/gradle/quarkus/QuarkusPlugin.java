@@ -17,7 +17,7 @@ public class QuarkusPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
-        BeekeeperExtension extension = project.getExtensions().create(BeekeeperExtension.EXTENSION, BeekeeperExtension.class);
+        project.getExtensions().create(BeekeeperExtension.EXTENSION, BeekeeperExtension.class);
 
         // Get beekeeperPluginExtension
         project.getPluginManager().withPlugin("io.quarkus", it -> {
