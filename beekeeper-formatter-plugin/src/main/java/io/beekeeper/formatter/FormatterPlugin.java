@@ -2,6 +2,7 @@ package io.beekeeper.formatter;
 
 import java.nio.file.Paths;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.gradle.api.GradleException;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -102,6 +103,10 @@ public class FormatterPlugin implements Plugin<Project> {
         project.getTasksByName("spotlessApply", true).forEach(t -> t.dependsOn("extractBeekeeperFormattingConfig"));
     }
 
+    @SuppressFBWarnings(
+            value="PATH_TRAVERSAL_IN",
+            justification="I know what I'm doing"
+    )
     private String getJavaRulesPath(Project project) {
         return Paths.get(project.getBuildDir().getAbsolutePath(), JAVA_FORMATTING_RULES_RELATIVE_PATH).toString();
     }
