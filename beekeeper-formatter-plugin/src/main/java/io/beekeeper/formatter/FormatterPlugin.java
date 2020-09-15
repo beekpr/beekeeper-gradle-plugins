@@ -42,7 +42,6 @@ public class FormatterPlugin implements Plugin<Project> {
     }
 
     private void applySpotlessJavaConfiguration(Project project) {
-
         SpotlessExtension extension = project.getExtensions().findByType(SpotlessExtension.class);
         if (extension == null) {
             throw new GradleException("Must have spotless plugin installed");
@@ -62,7 +61,6 @@ public class FormatterPlugin implements Plugin<Project> {
     }
 
     private void applySpotlessGroovyConfiguration(Project project) {
-
         SpotlessExtension extension = project.getExtensions().findByType(SpotlessExtension.class);
         if (extension == null) {
             throw new GradleException("Must have spotless plugin installed");
@@ -104,8 +102,8 @@ public class FormatterPlugin implements Plugin<Project> {
     }
 
     @SuppressFBWarnings(
-            value="PATH_TRAVERSAL_IN",
-            justification="I know what I'm doing"
+        value = "PATH_TRAVERSAL_IN",
+        justification = "I know what I'm doing"
     )
     private String getJavaRulesPath(Project project) {
         return Paths.get(project.getBuildDir().getAbsolutePath(), JAVA_FORMATTING_RULES_RELATIVE_PATH).toString();
