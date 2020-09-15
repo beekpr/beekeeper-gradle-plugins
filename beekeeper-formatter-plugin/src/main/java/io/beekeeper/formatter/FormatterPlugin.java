@@ -101,10 +101,7 @@ public class FormatterPlugin implements Plugin<Project> {
         project.getTasksByName("spotlessApply", true).forEach(t -> t.dependsOn("extractBeekeeperFormattingConfig"));
     }
 
-    @SuppressFBWarnings(
-        value = "PATH_TRAVERSAL_IN",
-        justification = "I know what I'm doing"
-    )
+    @SuppressFBWarnings("PATH_TRAVERSAL_IN")
     private String getJavaRulesPath(Project project) {
         return Paths.get(project.getBuildDir().getAbsolutePath(), JAVA_FORMATTING_RULES_RELATIVE_PATH).toString();
     }

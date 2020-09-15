@@ -3,8 +3,6 @@ plugins {
 }
 
 dependencies {
-    compileOnly 'com.github.spotbugs:spotbugs-annotations:3.1.12'
-
     implementation project(':beekeeper-code-analysis-plugin')
     implementation project(':beekeeper-formatter-plugin')
     implementation project(':beekeeper-ide-plugin')

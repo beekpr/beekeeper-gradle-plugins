@@ -25,8 +25,9 @@ subprojects {
     }
 
     dependencies {
+        compileOnly 'com.github.spotbugs:spotbugs-annotations:3.1.12'
+
         implementation localGroovy()
-        implementation "com.github.spotbugs:spotbugs-annotations:3.1.12"
         testImplementation project(':beekeeper-plugin-test-support')
         testImplementation "org.spockframework:spock-core:1.3-groovy-2.5"
     }
