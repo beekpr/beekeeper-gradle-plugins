@@ -29,6 +29,7 @@ public class CheckVersionTask extends DefaultTask implements Task {
     private String url;
 
     @TaskAction
+    // We have suppressed URLCONNECTION_SSRF_FD. Please make sure to set a valid URL in your plugin configuration.
     @SuppressFBWarnings({ "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", "URLCONNECTION_SSRF_FD" })
     public void check() throws MalformedURLException, IOException {
         try (InputStream stream = new URL(this.url).openStream()) {
