@@ -1,6 +1,6 @@
 plugins {
     id "com.gradle.plugin-publish" version "0.12.0" apply false
-    id "io.beekeeper.gradle.plugin" version "0.7.11"
+    id "io.beekeeper.gradle.plugin" version "0.8.9"
 }
 
 group = 'io.beekeeper.gradle'
@@ -25,6 +25,8 @@ subprojects {
     }
 
     dependencies {
+        compileOnly 'com.github.spotbugs:spotbugs-annotations:3.1.12'
+
         implementation localGroovy()
         testImplementation project(':beekeeper-plugin-test-support')
         testImplementation "org.spockframework:spock-core:1.3-groovy-2.5"

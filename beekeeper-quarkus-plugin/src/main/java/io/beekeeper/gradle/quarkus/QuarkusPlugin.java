@@ -57,4 +57,3 @@ public class QuarkusPlugin implements Plugin<Project> {
 
     }
 }
-

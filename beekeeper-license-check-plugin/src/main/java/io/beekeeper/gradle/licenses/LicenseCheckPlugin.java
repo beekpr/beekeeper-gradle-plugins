@@ -36,7 +36,8 @@ public class LicenseCheckPlugin implements Plugin<Project> {
             Files.copy(
                 LicenseCheckPlugin.class.getResourceAsStream("allowed-licenses.json"),
                 path,
-                StandardCopyOption.REPLACE_EXISTING);
+                StandardCopyOption.REPLACE_EXISTING
+            );
             File file = path.toFile();
             file.deleteOnExit();
             return file;

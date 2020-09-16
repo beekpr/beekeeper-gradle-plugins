@@ -41,7 +41,6 @@ public class ExtractResourceTask extends DefaultTask implements Task {
     @TaskAction
     @SuppressFBWarnings("RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE")
     public void extract() throws IOException {
-
         try (final InputStream stream = ExtractResourceTask.class.getClassLoader().getResourceAsStream(resourcePath)) {
             getLogger().info("Extracting resource...");
             File destination = getProject().file(getDestination());

@@ -22,7 +22,6 @@ import org.owasp.dependencycheck.gradle.extension.DependencyCheckExtension;
 
 public class SecurityPlugin implements Plugin<Project> {
 
-
     public static final String BEEKEEPER_PLUGIN_EXTENSION = StringUtils.uncapitalize(
         BeekeeperSecurityExtension.class.getSimpleName()
 
@@ -37,7 +36,6 @@ public class SecurityPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
         project.getPluginManager().apply(DependencyCheckPlugin.class);
-
 
         DependencyCheckExtension config = project.getExtensions().getByType(DependencyCheckExtension.class);
         config.setFormats(
@@ -135,4 +133,3 @@ public class SecurityPlugin implements Plugin<Project> {
         dependencyCheckExtension.getSkipConfigurations().add("spotbugs");
     }
 }
-
