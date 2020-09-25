@@ -1,3 +1,4 @@
+package io.beekeeper.gradle.security
 import io.beekeeper.gradle.security.PatchVulnerableLibrariesPlugin
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
