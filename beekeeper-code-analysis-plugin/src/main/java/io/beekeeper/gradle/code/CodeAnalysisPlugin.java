@@ -45,13 +45,22 @@ public class CodeAnalysisPlugin implements Plugin<Project> {
 
     private void configureTasks(Project project) {
         project.getTasks().withType(SpotBugsTask.class, task -> {
+            // Only leave the Main sourceset as enabled
+            if (!task.getName().equalsIgnoreCase("spotbugsMain")) {
+                task.setEnabled(false);
+                project.getTasks().remove(task);
+                return;
+            }
+
+            // Currently we offer no support for SpotBugs for Quarkus
             if (isQuarkusProject(project)) {
                 task.setEnabled(false);
-            } else {
-                boolean isJenkins = isJenkins();
-                task.getReports().maybeCreate("html").setEnabled(isJenkins);
-                task.getReports().maybeCreate("xml").setEnabled(isJenkins);
+                return;
             }
+
+            boolean isJenkins = isJenkins();
+            task.getReports().maybeCreate("xml").setEnabled(isJenkins);
+            task.getReports().maybeCreate("html").setEnabled(!isJenkins);
         });
     }
 
