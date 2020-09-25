@@ -49,8 +49,8 @@ public class CodeAnalysisPlugin implements Plugin<Project> {
                 task.setEnabled(false);
             } else {
                 boolean isJenkins = isJenkins();
-                task.getReports().maybeCreate("html").setEnabled(isJenkins);
-                task.getReports().maybeCreate("xml").setEnabled(!isJenkins);
+                task.getReports().maybeCreate("xml").setEnabled(isJenkins);
+                task.getReports().maybeCreate("html").setEnabled(!isJenkins);
             }
         });
     }
