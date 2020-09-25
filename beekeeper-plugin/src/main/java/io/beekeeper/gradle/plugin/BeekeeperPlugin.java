@@ -10,7 +10,6 @@ import io.beekeeper.formatter.FormatterPlugin;
 import io.beekeeper.gradle.code.CodeAnalysisPlugin;
 import io.beekeeper.gradle.licenses.LicenseCheckPlugin;
 import io.beekeeper.gradle.plugin.tasks.CheckVersionTask;
-import io.beekeeper.gradle.security.PatchVulnerableLibrariesPlugin;
 import io.beekeeper.gradle.security.SecurityPlugin;
 import io.beekeeper.gradle.testing.TestingPlugin;
 import io.beekeeper.ide.IdePlugin;
@@ -50,7 +49,6 @@ public class BeekeeperPlugin implements Plugin<Project> {
         project.getPluginManager().apply(LicenseCheckPlugin.class);
         project.getPluginManager().apply(QuarkusPlugin.class);
         project.getPluginManager().apply(SecurityPlugin.class);
-        project.getPluginManager().apply(PatchVulnerableLibrariesPlugin.class);
         project.getPluginManager().apply(TestingPlugin.class);
         project.getPluginManager().apply(DependencyUpdatesCheckPlugin.class);
 
