@@ -17,6 +17,13 @@ class GradleVersionCompatibilitySpec extends Specification {
     GradleRunner runner
 
     static final List<String> supportedVersions = [
+        '5.6'
+    ]
+
+    static final List<String> unsupportedVersions = [
+        '4.5.1',
+        '4.4.1',
+        '3.5',
         '4.6',
         '4.7',
         '4.8',
@@ -24,9 +31,8 @@ class GradleVersionCompatibilitySpec extends Specification {
         '4.9',
         '4.10',
         "5.0",
-        '5.1'
+        "5.1",
     ]
-    static final List<String> unsupportedVersions = ['4.5.1', '4.4.1', '3.5']
 
     def setup() {
         runner = workspace.runner.withPluginClasspath()
@@ -98,7 +104,7 @@ class GradleVersionCompatibilitySpec extends Specification {
         then:
         def exception = thrown(UnexpectedBuildFailure)
 
-        assert exception.message.contains('This version of the plugin is incompatible with gradle < 4.6!')
+        assert exception.message.contains('This version of the plugin is incompatible with gradle < 5.6!')
 
         where:
         gradleVersion << unsupportedVersions
