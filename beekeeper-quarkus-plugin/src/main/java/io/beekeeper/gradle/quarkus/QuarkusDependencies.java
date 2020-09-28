@@ -28,7 +28,10 @@ public class QuarkusDependencies {
             "io.quarkus:quarkus-smallrye-health",
 
             "io.quarkus:quarkus-resteasy",
-            "io.quarkus:quarkus-resteasy-jackson"
+            "io.quarkus:quarkus-resteasy-jackson",
+            "org.zalando:problem:0.25.0",
+            "org.zalando:jackson-datatype-problem:0.25.0",
+            "io.beekeeper:quarkus-exception-mapper:0.2"
         );
 
         List<String> restClient = Arrays.asList(
