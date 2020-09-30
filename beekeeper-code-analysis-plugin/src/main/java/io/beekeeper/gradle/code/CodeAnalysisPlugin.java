@@ -48,7 +48,6 @@ public class CodeAnalysisPlugin implements Plugin<Project> {
             // Only leave the Main sourceset as enabled
             if (!task.getName().equalsIgnoreCase("spotbugsMain")) {
                 task.setEnabled(false);
-                project.getTasks().remove(task);
                 return;
             }
 
