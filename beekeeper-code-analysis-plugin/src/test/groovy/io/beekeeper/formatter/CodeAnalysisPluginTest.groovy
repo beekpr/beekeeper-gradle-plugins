@@ -34,7 +34,5 @@ class CodeAnalysisPluginTest extends Specification {
 
         then:
         result.output.contains("spotbugsMain")
-        !result.output.contains("spotbugsTest")
-
     }
 }
