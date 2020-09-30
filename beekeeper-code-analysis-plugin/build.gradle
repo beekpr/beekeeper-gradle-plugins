@@ -1,5 +1,5 @@
 dependencies {
-    implementation 'gradle.plugin.com.github.spotbugs.snom:spotbugs-gradle-plugin:4.5.0'
+    implementation 'gradle.plugin.com.github.spotbugs.snom:spotbugs-gradle-plugin:4.5.1'
 }
 
 gradlePlugin {
