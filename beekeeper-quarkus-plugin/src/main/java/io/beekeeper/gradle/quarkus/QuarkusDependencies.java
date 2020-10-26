@@ -11,8 +11,9 @@ public class QuarkusDependencies {
             "io.quarkus:quarkus-logging-gelf",
             "io.quarkus:quarkus-logging-sentry",
             "org.jboss.slf4j:slf4j-jboss-logging",
-            "io.quarkus:quarkus-smallrye-metrics",
-            "io.quarkus:quarkus-smallrye-health"
+            "io.quarkus:quarkus-smallrye-health",
+            "io.quarkus:quarkus-micrometer",
+            "io.quarkus:micrometer-registry-prometheus"
         );
 
         List<String> db = Arrays.asList(
@@ -24,8 +25,9 @@ public class QuarkusDependencies {
             "io.quarkus:quarkus-logging-gelf",
             "io.quarkus:quarkus-logging-sentry",
             "org.jboss.slf4j:slf4j-jboss-logging",
-            "io.quarkus:quarkus-smallrye-metrics",
             "io.quarkus:quarkus-smallrye-health",
+            "io.quarkus:quarkus-micrometer",
+            "io.quarkus:micrometer-registry-prometheus",
 
             "io.quarkus:quarkus-resteasy",
             "io.quarkus:quarkus-resteasy-jackson",
