@@ -18,6 +18,7 @@ public class QuarkusDependencies {
 
         List<String> db = Arrays.asList(
             "io.quarkus:quarkus-agroal",
+            "io.quarkus:quarkus-liquibase",
             "io.quarkus:quarkus-jdbc-postgresql"
         );
 
