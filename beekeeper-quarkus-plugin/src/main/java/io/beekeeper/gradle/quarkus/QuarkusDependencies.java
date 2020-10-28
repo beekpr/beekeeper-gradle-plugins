@@ -23,13 +23,6 @@ public class QuarkusDependencies {
         );
 
         List<String> service = Arrays.asList(
-            "io.quarkus:quarkus-logging-gelf",
-            "io.quarkus:quarkus-logging-sentry",
-            "org.jboss.slf4j:slf4j-jboss-logging",
-            "io.quarkus:quarkus-smallrye-health",
-            "io.quarkus:quarkus-micrometer",
-            "io.micrometer:micrometer-registry-prometheus",
-
             "io.quarkus:quarkus-resteasy",
             "io.quarkus:quarkus-resteasy-jackson",
             "org.zalando:problem:0.25.0",
