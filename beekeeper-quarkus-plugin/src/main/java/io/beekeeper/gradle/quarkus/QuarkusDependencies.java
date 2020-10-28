@@ -36,11 +36,18 @@ public class QuarkusDependencies {
             "io.quarkus:quarkus-rest-client-jackson"
         );
 
+        List<String> eventBus = Arrays.asList(
+            "io.quarkus:quarkus-smallrye-reactive-messaging",
+            "io.quarkus:quarkus-smallrye-reactive-messaging-kafka",
+            "io.confluent:kafka-avro-serializer:6.0.0"
+        );
+
         HashMap<String, List<String>> dependencies = new HashMap<>();
         dependencies.put("core", core);
         dependencies.put("db", db);
         dependencies.put("service", service);
         dependencies.put("restClient", restClient);
+        dependencies.put("eventBus", eventBus);
 
         return dependencies;
     }
