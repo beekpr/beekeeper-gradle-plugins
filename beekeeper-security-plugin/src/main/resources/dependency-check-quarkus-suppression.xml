@@ -84,4 +84,81 @@
         <packageUrl regex="true">^pkg:maven/io\.smallrye\.reactive/smallrye\-reactive\-converter\-mutiny@.*$</packageUrl>
         <cpe>cpe:/a:mutiny:mutiny</cpe>
     </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: graal-sdk-20.2.0.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.graalvm\.sdk/graal\-sdk@.*$</packageUrl>
+        <cpe>cpe:/a:oracle:graalvm</cpe>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: mutiny-reactive-streams-operators-0.9.0.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.smallrye\.reactive/mutiny\-reactive\-streams\-operators@.*$</packageUrl>
+        <cpe>cpe:/a:mutiny:mutiny</cpe>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: quarkus-mutiny-reactive-streams-operators-1.9.0.Final.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-mutiny\-reactive\-streams\-operators@.*$</packageUrl>
+        <cpe>cpe:/a:mutiny:mutiny</cpe>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: quarkus-resteasy-jackson-1.9.0.Final.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.quarkus/quarkus\-resteasy\-jackson@.*$</packageUrl>
+        <cpe>cpe:/a:redhat:resteasy</cpe>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: smallrye-mutiny-vertx-core-1.2.1.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.smallrye\.reactive/smallrye\-mutiny\-vertx\-core@.*$</packageUrl>
+        <cpe>cpe:/a:mutiny:mutiny</cpe>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: smallrye-mutiny-vertx-kafka-client-1.2.1.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.smallrye\.reactive/smallrye\-mutiny\-vertx\-kafka\-client@.*$</packageUrl>
+        <cpe>cpe:/a:mutiny:mutiny</cpe>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: smallrye-mutiny-vertx-runtime-1.2.1.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.smallrye\.reactive/smallrye\-mutiny\-vertx\-runtime@.*$</packageUrl>
+        <cpe>cpe:/a:mutiny:mutiny</cpe>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: vertx-bridge-common-3.9.3.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.vertx/vertx\-bridge\-common@.*$</packageUrl>
+        <cpe>cpe:/a:eclipse:vert.x</cpe>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: vertx-core-3.9.3.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.vertx/vertx\-core@.*$</packageUrl>
+        <cpe>cpe:/a:eclipse:vert.x</cpe>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: vertx-kafka-client-3.9.3.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.vertx/vertx\-kafka\-client@.*$</packageUrl>
+        <cpe>cpe:/a:eclipse:vert.x</cpe>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: vertx-mutiny-generator-1.2.1.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.smallrye\.reactive/vertx\-mutiny\-generator@.*$</packageUrl>
+        <cpe>cpe:/a:mutiny:mutiny</cpe>
+    </suppress>
 </suppressions>
