@@ -84,7 +84,7 @@ public class BeekeeperDependencyCheckPlugin implements Plugin<Project> {
         });
 
         Stream.of(ANALYZE_TASK, AGGREGATE_TASK)
-            .map(owaspTaskName -> project.getTasksByName(owaspTaskName, true))
+            .map(owaspTaskName -> project.getTasksByName(owaspTaskName, false))
             .flatMap(Collection::stream)
             .forEach(owaspTask -> owaspTask.dependsOn(appendCommonSuppression));
     }
