@@ -35,6 +35,12 @@ public class BeekeeperDependencyCheckPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
+
+        // Only apply this project on a parent. Never on sub-projects
+        if (project.getParent() != null) {
+            return;
+        }
+
         project.getPluginManager().apply(DependencyCheckPlugin.class);
 
         DependencyCheckExtension config = project.getExtensions().getByType(DependencyCheckExtension.class);
