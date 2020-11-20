@@ -2,6 +2,7 @@ package io.beekeeper.gradle.plugin;
 
 import io.beekeeper.gradle.dependencies.DependencyUpdatesCheckPlugin;
 import io.beekeeper.gradle.quarkus.QuarkusDependencies;
+import io.beekeeper.gradle.testing.SonarPlugin;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import io.beekeeper.gradle.quarkus.QuarkusPlugin;
@@ -50,6 +51,7 @@ public class BeekeeperPlugin implements Plugin<Project> {
         project.getPluginManager().apply(QuarkusPlugin.class);
         project.getPluginManager().apply(SecurityPlugin.class);
         project.getPluginManager().apply(TestingPlugin.class);
+        project.getPluginManager().apply(SonarPlugin.class);
         project.getPluginManager().apply(DependencyUpdatesCheckPlugin.class);
 
         for (Project subproject : project.getSubprojects()) {

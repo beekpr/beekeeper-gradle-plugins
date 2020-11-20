@@ -1,4 +1,15 @@
+plugins {
+    id "org.sonarqube" version "3.0"
+}
+
 dependencies {
+}
+
+sonarqube {
+    properties {
+        property "sonar.host.url", "https://sonarqube.internal.beekeeper.io"
+        property "sonar.sources", "src"
+    }
 }
 
 gradlePlugin {
@@ -6,6 +17,10 @@ gradlePlugin {
         testingPlugin {
             id = 'io.beekeeper.gradle.plugins.testing'
             implementationClass = 'io.beekeeper.gradle.testing.TestingPlugin'
+        }
+        sonarqubePlugin {
+            id = 'io.beekeeper.gradle.plugins.sonarqube'
+            implementationClass = 'io.beekeeper.gradle.testing.SonarPlugin'
         }
     }
 }
@@ -17,9 +32,15 @@ pluginBundle {
 
     plugins {
         testingPlugin {
-            id = 'io.beekeeper.gradle.plugins.testing'
+            id = 'io.beekeeper.gradle.plugins.sonarqube'
             displayName = 'Beekeeper Testing Plugin'
             description = 'Bekeeper common settings for testing. Includes Code Coverage.'
+            website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
+        }
+        sonarqubePlugin {
+            id = 'io.beekeeper.gradle.plugins.testing'
+            displayName = 'Beekeeper Sonarqube Plugin'
+            description = 'Bekeeper Sonarqube plugin to run scan and push the results to Sonarqube server.'
             website = 'https://github.com/beekpr/beekeeper-gradle-plugins/blob/master/README.md'
         }
     }
