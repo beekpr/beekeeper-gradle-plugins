@@ -24,12 +24,4 @@
         <cve>CVE-2005-0036</cve>
         <cve>CVE-2005-0861</cve>
     </suppress>
-    <suppress>
-        <notes><![CDATA[
-   This is not even an issue with Groovy but with some Apache Groovy API, completely unrelated to this package.
-   file name: groovy-sql-2.4.12.jar
-   ]]></notes>
-        <packageUrl regex="true">^pkg:maven/org\.codehaus\.groovy/groovy\-sql@.*$</packageUrl>
-        <cve>CVE-2016-6497</cve>
-    </suppress>
 </suppressions>
