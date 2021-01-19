@@ -1,5 +1,4 @@
 package io.beekeeper.gradle.security
-import io.beekeeper.gradle.security.SecurityPlugin
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
@@ -69,7 +68,7 @@ class SuppressionSpecification extends Specification {
         dependencies {
             compile "com.rabbitmq:amqp-client:5.7.3"
             compile "org.liquibase:liquibase-groovy-dsl:2.1.0"
-            compile "org.codehaus.groovy:groovy-sql:2.4.12"
+            compile "org.codehaus.groovy:groovy-sql:2.4.21"
             compile "io.quarkus:quarkus-resteasy"
             implementation "io.quarkus:quarkus-kubernetes"
         }
@@ -99,7 +98,7 @@ class SuppressionSpecification extends Specification {
         dependencies {
             compile "com.rabbitmq:amqp-client:5.7.3"
             compile "org.liquibase:liquibase-groovy-dsl:2.1.0"
-            compile "org.codehaus.groovy:groovy-sql:2.4.12"
+            compile "org.codehaus.groovy:groovy-sql:2.4.21"
         }
 
         beekeeperSecurityExtension{

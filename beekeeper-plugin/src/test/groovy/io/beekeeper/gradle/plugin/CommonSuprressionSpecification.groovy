@@ -46,7 +46,7 @@ class CommonSuprressionSpecification extends Specification {
         dependencies {
             compile "com.rabbitmq:amqp-client:5.7.3"
             compile "org.liquibase:liquibase-groovy-dsl:2.1.0"
-            compile "org.codehaus.groovy:groovy-sql:2.4.12"
+            compile "org.codehaus.groovy:groovy-sql:2.4.21"
         }
 
         beekeeperSecurityExtension{
