@@ -27,7 +27,7 @@ public class QuarkusDependencies {
             "io.quarkus:quarkus-resteasy-jackson",
             "org.zalando:problem:0.25.0",
             "org.zalando:jackson-datatype-problem:0.25.0",
-            "io.beekeeper:quarkus-exception-mapper",
+            "io.beekeeper:quarkus-beekeeper-api-convention",
             "io.quarkus:quarkus-smallrye-openapi"
         );
 
