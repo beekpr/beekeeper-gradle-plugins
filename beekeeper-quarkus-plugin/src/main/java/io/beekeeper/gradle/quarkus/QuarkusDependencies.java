@@ -10,7 +10,6 @@ public class QuarkusDependencies {
         List<String> core = Arrays.asList(
             "io.quarkus:quarkus-logging-gelf",
             "io.quarkus:quarkus-logging-sentry",
-            "org.jboss.slf4j:slf4j-jboss-logging",
             "io.quarkus:quarkus-smallrye-health",
             "io.quarkus:quarkus-micrometer",
             "io.micrometer:micrometer-registry-prometheus"
