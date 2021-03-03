@@ -24,8 +24,8 @@ public class QuarkusDependencies {
         List<String> service = Arrays.asList(
             "io.quarkus:quarkus-resteasy",
             "io.quarkus:quarkus-resteasy-jackson",
-            "org.zalando:problem:0.25.0",
-            "org.zalando:jackson-datatype-problem:0.25.0",
+            "org.zalando:problem",
+            "org.zalando:jackson-datatype-problem",
             "io.beekeeper:quarkus-beekeeper-api-convention",
             "io.quarkus:quarkus-smallrye-openapi"
         );
@@ -37,8 +37,7 @@ public class QuarkusDependencies {
 
         List<String> eventBus = Arrays.asList(
             "io.quarkus:quarkus-smallrye-reactive-messaging",
-            "io.quarkus:quarkus-smallrye-reactive-messaging-kafka",
-            "io.confluent:kafka-avro-serializer:6.0.0"
+            "io.quarkus:quarkus-smallrye-reactive-messaging-kafka"
         );
 
         HashMap<String, List<String>> dependencies = new HashMap<>();
