@@ -25,7 +25,7 @@ subprojects {
     }
 
     dependencies {
-        compileOnly 'com.github.spotbugs:spotbugs-annotations:3.1.12'
+        compileOnly 'com.github.spotbugs:spotbugs-annotations:4.2.3'
 
         implementation localGroovy()
         testImplementation project(':beekeeper-plugin-test-support')
