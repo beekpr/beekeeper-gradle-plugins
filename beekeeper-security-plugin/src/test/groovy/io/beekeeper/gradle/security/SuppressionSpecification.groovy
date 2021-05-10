@@ -29,6 +29,8 @@ class SuppressionSpecification extends Specification {
         result.output.contains("appendSuppressionsQuarkus")
     }
 
+    // See FUL-27073 
+
     // def "it should report suppressed vulnerability when not using common suppression"() {
     //     given:
     //     setUpBuildGradle(false)
