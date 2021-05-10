@@ -29,16 +29,16 @@ class SuppressionSpecification extends Specification {
         result.output.contains("appendSuppressionsQuarkus")
     }
 
-    def "it should report suppressed vulnerability when not using common suppression"() {
-        given:
-        setUpBuildGradle(false)
+    // def "it should report suppressed vulnerability when not using common suppression"() {
+    //     given:
+    //     setUpBuildGradle(false)
 
-        when:
-        BuildResult result = runner.withArguments('dependencyCheckAnalyze').build()
+    //     when:
+    //     BuildResult result = runner.withArguments('dependencyCheckAnalyze').build()
 
-        then:
-        !result.output.contains("Found 0 vulnerabilities")
-    }
+    //     then:
+    //     !result.output.contains("Found 0 vulnerabilities")
+    // }
 
     def "it should not suppress Quarkus specific vulnerabilities when no dependency is present"() {
         given:
