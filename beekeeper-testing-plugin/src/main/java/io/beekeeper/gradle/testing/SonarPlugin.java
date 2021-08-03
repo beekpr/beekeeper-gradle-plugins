@@ -14,7 +14,7 @@ public class SonarPlugin implements Plugin<Project> {
     private void applySonar(Project project) {
         project.getPluginManager().withPlugin("org.sonarqube:3.0", it -> {
             project.getPluginManager().apply("sonarqube");
-            project.getTasks().getByName("sonarqube").dependsOn("build");
+            project.getTasks().getByName("sonarqube").dependsOn("test");
         });
     }
 }
