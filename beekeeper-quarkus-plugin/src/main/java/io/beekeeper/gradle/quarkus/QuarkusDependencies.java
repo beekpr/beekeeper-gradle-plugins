@@ -11,8 +11,7 @@ public class QuarkusDependencies {
             "io.quarkus:quarkus-logging-gelf",
             "io.quarkus:quarkus-logging-sentry",
             "io.quarkus:quarkus-smallrye-health",
-            "io.quarkus:quarkus-micrometer",
-            "io.micrometer:micrometer-registry-prometheus"
+            "io.quarkus:quarkus-micrometer-registry-prometheus"
         );
 
         List<String> db = Arrays.asList(
