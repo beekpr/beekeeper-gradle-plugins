@@ -40,7 +40,13 @@ public class PatchedModules {
             ),
             new PatchedModule(
                     "org.apache.logging.log4j",
-                    "log4j-slf4j-impl ",
+                    "log4j-slf4j-impl",
+                    "2.15.0",
+                    "CVE-2021-44228"
+            ),
+            new PatchedModule(
+                    "org.apache.logging.log4j",
+                    "log4j-to-slf4j",
                     "2.15.0",
                     "CVE-2021-44228"
             )
