@@ -21,8 +21,7 @@ public class QuarkusPlugin implements Plugin<Project> {
 
         // Get beekeeperPluginExtension
         project.getPluginManager().withPlugin("io.quarkus", it -> {
-            project.afterEvaluate(this::applyJava11);
-
+            project.afterEvaluate(this::applyJavaVersion);
         });
 
     }
@@ -31,12 +30,13 @@ public class QuarkusPlugin implements Plugin<Project> {
         static final String EXTENSION = "beekeeperJava";
 
         boolean java11;
+        boolean java17;
     }
 
-    private void applyJava11(Project project) {
+    private void applyJavaVersion(Project project) {
         BeekeeperExtension extension = project.getExtensions().getByType(BeekeeperExtension.class);
 
-        if (extension.java11) {
+        if (extension.java11 || extension.java17) {
             JavaCompile compileJava = (JavaCompile) project.getTasks().getByName("compileJava");
             compileJava.getOptions().setEncoding("UTF-8");
             compileJava.getOptions().setCompilerArgs(Collections.singletonList("-parameters"));
@@ -49,10 +49,17 @@ public class QuarkusPlugin implements Plugin<Project> {
                 "systemProperty",
                 Arrays.asList("java.util.logging.manager", "org.jboss.logmanager.LogManager")
             );
+        }
 
-            JavaPluginConvention java = project.getConvention().getPlugin(JavaPluginConvention.class);
+        JavaPluginConvention java = project.getConvention().getPlugin(JavaPluginConvention.class);
+        if (extension.java11) {
             java.setSourceCompatibility(JavaVersion.VERSION_11);
             java.setTargetCompatibility(JavaVersion.VERSION_11);
+        }
+
+        if (extension.java17) {
+            java.setSourceCompatibility(JavaVersion.VERSION_17);
+            java.setTargetCompatibility(JavaVersion.VERSION_17);
         }
 
     }
