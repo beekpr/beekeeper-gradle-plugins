@@ -18,7 +18,7 @@ public class TestingPlugin implements Plugin<Project> {
         project.getPluginManager().withPlugin("java", it -> {
             project.getPluginManager().apply("jacoco");
             JacocoPluginExtension jacoco = project.getExtensions().getByType(JacocoPluginExtension.class);
-            jacoco.setToolVersion("0.8.4");
+            jacoco.setToolVersion("0.8.7");
         });
 
         project.afterEvaluate(this::configureJacoco);
