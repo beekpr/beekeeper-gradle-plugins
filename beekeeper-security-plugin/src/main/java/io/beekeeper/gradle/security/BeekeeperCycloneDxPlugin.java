@@ -13,26 +13,8 @@ public class BeekeeperCycloneDxPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
-        project.getPluginManager().apply(CycloneDxPlugin.class);
-
-        Provider<LockService> lockService = project.getGradle()
-            .getSharedServices()
-            .registerIfAbsent(
-                "lockService",
-                LockService.class,
-                (spec) -> {
-                    spec.getMaxParallelUsages().set(1);
-                }
-            );
-
-        project.getTasks().getByPath("cyclonedxBom").usesService(lockService);
-    }
-
-    public static class LockService implements BuildService<BuildServiceParameters.None> {
-        @Override
-        public BuildServiceParameters.None getParameters() {
-            return null;
+        if (project.getRootProject().equals(project)) {
+            project.getPluginManager().apply(CycloneDxPlugin.class);
         }
     }
-
 }
