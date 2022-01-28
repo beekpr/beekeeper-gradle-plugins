@@ -15,7 +15,7 @@ import com.github.spotbugs.snom.SpotBugsTask;
 public class CodeAnalysisPlugin implements Plugin<Project> {
 
     public static final String IDENTIFIER = "io.beekeeper.gradle.plugins.code-analysis-check";
-    private static final String SPOT_BUGS_VERSION = "5.0.5";
+    private static final String SPOT_BUGS_VERSION = "4.5.3";
     private static final String FIND_SEC_BUGS_VERSION = "1.11.0";
     private static final String QUARKUS_DEPENDENCY_GROUP = "io.quarkus";
 
