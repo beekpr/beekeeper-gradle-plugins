@@ -58,7 +58,6 @@ public class BeekeeperDependencyCheckPlugin implements Plugin<Project> {
             if (!beekeeperSecurityExtension.applyCommonSuppressions) {
                 return;
             }
-            skipSpotbugs(action);
             prepareCommonSuppression(action, DEPENDENCY_CHECK_COMMON_SUPPRESSION_PATH, "Common");
             if (isQuarkusProject(project)) {
                 prepareCommonSuppression(action, DEPENDENCY_CHECK_QUARKUS_SUPPRESSION_PATH, "Quarkus");
@@ -129,13 +128,6 @@ public class BeekeeperDependencyCheckPlugin implements Plugin<Project> {
         public void applyCommonSuppressions(boolean applyCommonSuppressions) {
             this.applyCommonSuppressions = applyCommonSuppressions;
         }
-    }
-
-    private void skipSpotbugs(Project action) {
-        final DependencyCheckExtension dependencyCheckExtension = action.getExtensions()
-            .getByType(DependencyCheckExtension.class);
-
-        dependencyCheckExtension.getSkipConfigurations().add("spotbugs");
     }
 
 }

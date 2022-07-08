@@ -80,10 +80,6 @@
         },
         {   
             "moduleName": "com.github.jk1:gradle-license-report"
-        },
-        {
-            "moduleVersion": "2.0.0",
-            "moduleName": "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin"
         }
     ]
 }

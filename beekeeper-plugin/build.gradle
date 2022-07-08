@@ -3,7 +3,6 @@ plugins {
 }
 
 dependencies {
-    implementation project(':beekeeper-code-analysis-plugin')
     implementation project(':beekeeper-formatter-plugin')
     implementation project(':beekeeper-ide-plugin')
     implementation project(':beekeeper-license-check-plugin')
