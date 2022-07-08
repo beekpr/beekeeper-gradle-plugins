@@ -33,11 +33,6 @@ that the plugin is at the correct version. This plugin does nothing more but che
 required minimum version versus the plugin version. That task is required mostly for automation, so that
 PRs can be rejected based on an outdated plugin.
 
-### Module Plugin: `io.beekeeper.gradle.plugins.code-analysis-check`
-
-Provides support for looking for common bugs in code. Applies the `gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin` plugin.
-Note, the Java 11 support is still "spotty"
-
 ### Module Plugin: `io.beekeeper.gradle.plugins.formatter`
 
 Applies the spotless formatter and configures it with Beekeeper conventions. Currently, supports the following:
@@ -77,7 +72,6 @@ If you are migrating an existing beekeeper project to make use of this plugin, t
 
    * Apply the plugin as in the instructions
    * Remove any of the following plugins which may be already in use and any of their configuration
-      * findbugs (check for tasks.withType(FindBugs))
       * eclipse
       * jacoco (remove jacoco configuration from gradle)
       * idea

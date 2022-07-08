@@ -7,7 +7,6 @@ import org.gradle.api.Project;
 import io.beekeeper.gradle.quarkus.QuarkusPlugin;
 
 import io.beekeeper.formatter.FormatterPlugin;
-import io.beekeeper.gradle.code.CodeAnalysisPlugin;
 import io.beekeeper.gradle.licenses.LicenseCheckPlugin;
 import io.beekeeper.gradle.plugin.tasks.CheckVersionTask;
 import io.beekeeper.gradle.security.SecurityPlugin;
@@ -43,7 +42,6 @@ public class BeekeeperPlugin implements Plugin<Project> {
     }
 
     private void applyPlugins(Project project) {
-        project.getPluginManager().apply(CodeAnalysisPlugin.class);
         project.getPluginManager().apply(FormatterPlugin.class);
         project.getPluginManager().apply(IdePlugin.class);
         project.getPluginManager().apply(LicenseCheckPlugin.class);
