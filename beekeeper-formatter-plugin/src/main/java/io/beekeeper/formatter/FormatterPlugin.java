@@ -1,7 +1,5 @@
 package io.beekeeper.formatter;
 
-import java.nio.file.Paths;
-
 import org.gradle.api.GradleException;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -9,8 +7,6 @@ import org.gradle.util.GradleVersion;
 
 import com.diffplug.gradle.spotless.SpotlessExtension;
 import com.diffplug.gradle.spotless.SpotlessPlugin;
-
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 public class FormatterPlugin implements Plugin<Project> {
     public static final String IDENTIFIER = "io.beekeeper.gradle.plugins.formatter";
