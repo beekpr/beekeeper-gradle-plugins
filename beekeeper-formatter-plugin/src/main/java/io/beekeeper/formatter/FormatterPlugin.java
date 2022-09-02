@@ -24,7 +24,6 @@ public class FormatterPlugin implements Plugin<Project> {
         applySpotlessJavaConfiguration(project);
         applySpotlessGroovyConfiguration(project);
         applySpotlessGradleConfiguration(project);
-        project.afterEvaluate(this::createFormatTask);
     }
 
     // TODO: Move it to the base gradle plugin
@@ -47,6 +46,7 @@ public class FormatterPlugin implements Plugin<Project> {
         // our plugin before the java plugin
         project.getPluginManager().withPlugin(PLUGIN_JAVA, javaPlugin -> {
             extension.java(java -> {
+                java.target("**/*.java");
                 java.googleJavaFormat();
                 java.removeUnusedImports();
                 java.trimTrailingWhitespace();
@@ -81,12 +81,5 @@ public class FormatterPlugin implements Plugin<Project> {
             gradle.trimTrailingWhitespace();
             gradle.indentWithSpaces(4);
         });
-    }
-
-    private void createFormatTask(Project project) {
-        // Make the spotless tasks dependent on the config extraction task,
-        // so they can reach the config files
-        project.getTasksByName("spotlessCheck", true).forEach(t -> t.dependsOn("extractBeekeeperFormattingConfig"));
-        project.getTasksByName("spotlessApply", true).forEach(t -> t.dependsOn("extractBeekeeperFormattingConfig"));
     }
 }

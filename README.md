@@ -77,6 +77,19 @@ If you are migrating an existing beekeeper project to make use of this plugin, t
       * idea
    * That's it!
 
+## Testing locally
+
+To test locally you should add to build.gradle
+```groovy
+id "maven-publish"
+if(project.name.endsWith('-plugin')) {
+     apply plugin: 'maven-publish'
+}
+repositories {
+     mavenLocal()
+}
+```
+After that you should run `./gradlew publishToMavenLocal` this will deploy plugin locally. After that you can add it to your project with `mavenLocal()`
 ## Disclaimer
 
 **The repository is public** and is not meant for containing _credentials or other sensitive_ information.
