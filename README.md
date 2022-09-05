@@ -94,6 +94,11 @@ After that you should run `./gradlew publishToMavenLocal` this will deploy plugi
 
 **The repository is public** and is not meant for containing _credentials or other sensitive_ information.
 
+## Changelog
+
+### 0.12.0
+Use google-java-format as a default formatter.
+
 ## License
 > Copyright 2019 Beekeeper
 >
