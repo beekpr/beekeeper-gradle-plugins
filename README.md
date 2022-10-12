@@ -79,6 +79,11 @@ If you are migrating an existing beekeeper project to make use of this plugin, t
 
 ## Testing locally
 
+Please make sure you're using java 11:
+```
+$ java -version
+```
+
 To test locally you should add to build.gradle
 ```groovy
 id "maven-publish"
