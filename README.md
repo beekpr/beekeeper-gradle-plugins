@@ -79,6 +79,11 @@ If you are migrating an existing beekeeper project to make use of this plugin, t
 
 ## Testing locally
 
+Please make sure you're using java 11:
+```
+$ java -version
+```
+
 To test locally you should add to build.gradle
 ```groovy
 id "maven-publish"
@@ -95,6 +100,11 @@ After that you should run `./gradlew publishToMavenLocal` this will deploy plugi
 **The repository is public** and is not meant for containing _credentials or other sensitive_ information.
 
 ## Changelog
+
+### 0.13.0
+Bump security plugin dependencies:
+- dependency-check-gradle to 7.2.1
+- cyclonedx-gradle-plugin to 1.7.2
 
 ### 0.12.0
 Use google-java-format as a default formatter.
