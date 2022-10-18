@@ -101,6 +101,9 @@ After that you should run `./gradlew publishToMavenLocal` this will deploy plugi
 
 ## Changelog
 
+### 0.13.1
+Bump `spotless-plugin-gradle` to 6.11.0 to include newer version of `google-java-format`.
+
 ### 0.13.0
 Bump security plugin dependencies:
 - dependency-check-gradle to 7.2.1
@@ -108,6 +111,13 @@ Bump security plugin dependencies:
 
 ### 0.12.0
 Use google-java-format as a default formatter.
+
+### 0.11.x
+`beekeeper-code-analysis-plugin` is removed (so does spotbugs)
+When upgrading to this version, please remove this line from `lombok.config`:
+```
+lombok.extern.findbugs.addSuppressFBWarnings = true
+```
 
 ## License
 > Copyright 2019 Beekeeper
