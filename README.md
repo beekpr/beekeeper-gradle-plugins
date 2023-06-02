@@ -101,6 +101,13 @@ After that you should run `./gradlew publishToMavenLocal` this will deploy plugi
 
 ## Changelog
 
+## 0.14.0
+Update gradle to 7.6 and build to java 11
+
+Bump security plugin dependencies:
+- `dependency-check-gradle` to 8.2.1
+- `cyclonedx-gradle-plugin` to 1.7.4
+
 ### 0.13.1
 Bump `spotless-plugin-gradle` to 6.11.0 to include newer version of `google-java-format`.
 
