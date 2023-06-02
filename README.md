@@ -109,6 +109,9 @@ Bump security plugin dependencies:
 - dependency-check-gradle to 7.2.1
 - cyclonedx-gradle-plugin to 1.7.2
 
+Migration:
+See release notes [here](https://github.com/beekpr/beekeeper-gradle-plugins/releases/tag/0.13.0)
+
 ### 0.12.0
 Use google-java-format as a default formatter.
 
