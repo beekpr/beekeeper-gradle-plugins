@@ -8,11 +8,9 @@ import static org.owasp.dependencycheck.reporting.ReportGenerator.Format.JSON;
 import static org.owasp.dependencycheck.reporting.ReportGenerator.Format.XML;
 
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
-
 import org.apache.commons.lang3.StringUtils;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -44,10 +42,10 @@ public class BeekeeperDependencyCheckPlugin implements Plugin<Project> {
 
         DependencyCheckExtension config = project.getExtensions().getByType(DependencyCheckExtension.class);
         config.setFormats(
-            Arrays.asList(
-                HTML,
-                XML,
-                JSON
+            List.of(
+                HTML.toString().toLowerCase(),
+                XML.toString().toLowerCase(),
+                JSON.toString().toLowerCase()
             )
         );
 
@@ -96,9 +94,7 @@ public class BeekeeperDependencyCheckPlugin implements Plugin<Project> {
     private void appendCommonSuppression(Project action, String commonSuppressionPath) {
         final DependencyCheckExtension dependencyCheckExtension = action.getExtensions()
             .getByType(DependencyCheckExtension.class);
-        final List<String> suppressionFiles = dependencyCheckExtension.getSuppressionFiles();
-
-        suppressionFiles.add(commonSuppressionPath);
+        dependencyCheckExtension.getSuppressionFiles().add(commonSuppressionPath);
     }
 
     private boolean isQuarkusProject(Project project) {
