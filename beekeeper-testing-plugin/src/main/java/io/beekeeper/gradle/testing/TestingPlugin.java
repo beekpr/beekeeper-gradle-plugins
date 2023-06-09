@@ -60,7 +60,9 @@ public class TestingPlugin implements Plugin<Project> {
         project.getTasks().withType(Test.class, task -> {
             final JacocoTaskExtension jacoco = task.getExtensions().getByType(JacocoTaskExtension.class);
             jacoco.setExcludeClassLoaders(List.of("*QuarkusClassLoader"));
-            jacoco.setDestinationFile(project.getLayout().getBuildDirectory().file("reports/jacoco/test.exec").get().getAsFile());
+            jacoco.setDestinationFile(
+                project.getLayout().getBuildDirectory().file("reports/jacoco/test.exec").get().getAsFile()
+            );
         });
 
         project.getTasks().withType(JacocoReport.class, task -> {
