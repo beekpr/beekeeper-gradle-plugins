@@ -101,6 +101,10 @@ After that you should run `./gradlew publishToMavenLocal` this will deploy plugi
 
 ## Changelog
 
+## 0.15.0
+Apply `quarkus-jacoco` dependency to Quarkus-based projects and configure it to build consolidated reports from both
+`@QuarkusTest`-annotated and unit tests. 
+
 ## 0.14.0
 Update gradle to 7.6 and build to java 11
 
