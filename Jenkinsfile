@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     dir('downstream') {
-                        def files = findFiles()
+                        def files = sh(script: 'ls -d */', returnStdout: true).trim().split('\n')
 
                         files.each { f ->
                             if (f.directory) {
