@@ -36,14 +36,15 @@ pipeline {
                 script {
                     dir('downstream') {
                         def folders = sh(script: 'ls -d -1 */', returnStdout: true).trim().split('\n')
-                        println("Folders: ${folders}")
+
                         folders.each { folder ->
                             dir(folder) {
-                                gradle {
-                                    tasks('clean')
-                                    tasks('check')
-                                    switches('-PbeekeeperPluginVersion=0.0.0')
-                                }
+                                sh('./gradlew clean build')
+//                                gradle {
+//                                    tasks('clean')
+//                                    tasks('check')
+//                                    switches('-PbeekeeperPluginVersion=0.0.0')
+//                                }
                             }
                         }
                     }
