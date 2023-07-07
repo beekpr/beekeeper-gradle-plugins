@@ -35,9 +35,11 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github-repo-credentials', usernameVariable: 'GITHUB_USR', passwordVariable: 'GITHUB_PSW')]) {
-                        sh('git config --local credential.helper "!f() { echo username=\\$GITHUB_USR; echo password=\\$GITHUB_PSW; }; f"')
-                        sh('git submodule update --init')
-                        sh('git config --local --unset credential.helper')
+                        sh '''
+                            git config --local credential.helper "!f() { echo username=\\$GITHUB_USR; echo password=\\$GITHUB_PSW; }; f"
+                            git submodule update --init
+                            git config --local --unset credential.helper
+                        '''
                     }
                     dir('downstream') {
                         def folders = sh(script: 'ls -d -1 */', returnStdout: true).trim().split('\n')
