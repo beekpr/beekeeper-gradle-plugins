@@ -31,6 +31,27 @@ pipeline {
                 }
             }
         }
+        stage("Build Downstream") {
+            steps {
+                script {
+                    dir('downstream') {
+                        def files = findFiles()
+
+                        files.each { f ->
+                            if (f.directory) {
+                                dir(f) {
+                                    gradle {
+                                        tasks('clean')
+                                        tasks('check')
+                                        switches('-PbeekeeperPluginVersion=0.0.0')
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         stage("Publish") {
             when {
                 branch 'master'
@@ -39,7 +60,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'beekeeper-gradle-portal-credentials', usernameVariable: 'GRADLE_PUBLISH_KEY', passwordVariable: 'GRADLE_PUBLISH_SECRET')]) {
                     gradle {
                         tasks('publishPlugins')
-                        switches('--Pversion=$VERSION -Pgradle.publish.key=$GRADLE_PUBLISH_KEY -Pgradle.publish.secret=$GRADLE_PUBLISH_SECRET')
+                        switches('-Pversion=$VERSION -Pgradle.publish.key=$GRADLE_PUBLISH_KEY -Pgradle.publish.secret=$GRADLE_PUBLISH_SECRET')
                     }
                 }
             }
