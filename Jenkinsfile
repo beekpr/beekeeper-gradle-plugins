@@ -35,10 +35,10 @@ pipeline {
             steps {
                 script {
                     dir('downstream') {
-                        def folders = sh(script: 'ls -d */', returnStdout: true).trim().split('\n')
-
-                        folders.each { f ->
-                            dir(f) {
+                        def folders = sh(script: 'ls -d -1 */', returnStdout: true).trim().split('\n')
+                        println("Folders: ${folders}")
+                        folders.each { folder ->
+                            dir(folder) {
                                 gradle {
                                     tasks('clean')
                                     tasks('check')
