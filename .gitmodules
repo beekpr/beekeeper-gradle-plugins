@@ -1,6 +1,6 @@
 [submodule "downstream/beekeeper-api-gateway-auth"]
 	path = downstream/beekeeper-api-gateway-auth
-	url = https://github.com/beekpr/beekeeper-api-gateway-auth
+	url = https://github.com/beekpr/beekeeper-api-gateway-auth.git
 [submodule "downstream/beekeeper-deploy-service"]
 	path = downstream/beekeeper-deploy-service
-	url = https://github.com/beekpr/beekeeper-deploy-service
+	url = https://github.com/beekpr/beekeeper-deploy-service.git
