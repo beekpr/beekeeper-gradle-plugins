@@ -31,7 +31,7 @@ pipeline {
                 }
             }
         }
-        stage("Build Downstream") {
+        stage("Test Downstream Compatibility") {
             steps {
                 script {
                     dir('downstream') {
