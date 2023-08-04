@@ -55,7 +55,7 @@ public class TestingPlugin implements Plugin<Project> {
         // - standalone version for unit tests
         // - Quarkus-provided version for tests annotated with @QuarkusTest
         // See: https://quarkus.io/guides/tests-with-coverage#coverage-for-tests-not-using-quarkustest
-        // The Quarkus' version is further configured by the quarkus-beekeeper-api-convention extension.
+        // The Quarkus' version is further configured by the quarkus-beekeeper-core extension.
 
         project.getTasks().withType(Test.class, task -> {
             final JacocoTaskExtension jacoco = task.getExtensions().getByType(JacocoTaskExtension.class);
