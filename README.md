@@ -103,7 +103,32 @@ After that you should run `./gradlew publishToMavenLocal` this will deploy plugi
 
 ## 0.15.0
 Apply `quarkus-jacoco` dependency to Quarkus-based projects and configure it to build consolidated reports from both
-`@QuarkusTest`-annotated and unit tests. 
+`@QuarkusTest`-annotated and unit tests.
+
+**Upgrading to this version requires changing how Beekeeper BOM is configured in project's dependencies:**
+- Go to you project's service's `build.gradle` and navigate to the `dependencies` section
+- Find these three lines:
+- 
+```groovy
+dependencies {
+    implementation platform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation platform("com.google.cloud:libraries-bom:${googleCloudVersion}")
+    universalBom platform("${beekeeperQuarkusPlatformGroupId}:${beekeeperQuarkusPlatformArtifactId}:${beekeeperQuarkusPlatformVersion}")
+
+    // (...)
+}
+```
+- Replace the `platform` method call with `enforcedPlatform`, as follows:
+
+```groovy
+dependencies {
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation enforcedPlatform("com.google.cloud:libraries-bom:${googleCloudVersion}")
+    universalBom enforcedPlatform("${beekeeperQuarkusPlatformGroupId}:${beekeeperQuarkusPlatformArtifactId}:${beekeeperQuarkusPlatformVersion}")
+
+    // (...)
+}
+```
 
 ## 0.14.0
 Update gradle to 7.6 and build to java 11
