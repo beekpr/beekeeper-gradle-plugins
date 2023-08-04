@@ -39,12 +39,19 @@ public class QuarkusDependencies {
             "io.quarkus:quarkus-smallrye-reactive-messaging-kafka"
         );
 
+        List<String> tracing = Arrays.asList(
+            "io.quarkus:quarkus-smallrye-opentracing",
+            "io.opentracing.contrib:opentracing-jdbc",
+            "io.beekeeper:quarkus-beekeeper-tracing"
+        );
+
         HashMap<String, List<String>> dependencies = new HashMap<>();
         dependencies.put("core", core);
         dependencies.put("db", db);
         dependencies.put("service", service);
         dependencies.put("restClient", restClient);
         dependencies.put("eventBus", eventBus);
+        dependencies.put("tracing", tracing);
 
         return dependencies;
     }
