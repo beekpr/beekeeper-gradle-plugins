@@ -112,7 +112,6 @@ Apply `quarkus-jacoco` dependency to Quarkus-based projects and configure it to 
 ```groovy
 dependencies {
     implementation platform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
-    implementation platform("com.google.cloud:libraries-bom:${googleCloudVersion}")
     universalBom platform("${beekeeperQuarkusPlatformGroupId}:${beekeeperQuarkusPlatformArtifactId}:${beekeeperQuarkusPlatformVersion}")
 
     // (...)
@@ -123,7 +122,6 @@ dependencies {
 ```groovy
 dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
-    implementation enforcedPlatform("com.google.cloud:libraries-bom:${googleCloudVersion}")
     universalBom enforcedPlatform("${beekeeperQuarkusPlatformGroupId}:${beekeeperQuarkusPlatformArtifactId}:${beekeeperQuarkusPlatformVersion}")
 
     // (...)
