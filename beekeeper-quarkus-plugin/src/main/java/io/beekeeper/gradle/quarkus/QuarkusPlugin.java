@@ -31,12 +31,13 @@ public class QuarkusPlugin implements Plugin<Project> {
 
         boolean java11;
         boolean java17;
+        boolean java21;
     }
 
     private void applyJavaVersion(Project project) {
         BeekeeperExtension extension = project.getExtensions().getByType(BeekeeperExtension.class);
 
-        if (extension.java11 || extension.java17) {
+        if (extension.java11 || extension.java17 || extension.java21) {
             JavaCompile compileJava = (JavaCompile) project.getTasks().getByName("compileJava");
             compileJava.getOptions().setEncoding("UTF-8");
             compileJava.getOptions().setCompilerArgs(Collections.singletonList("-parameters"));
@@ -60,6 +61,11 @@ public class QuarkusPlugin implements Plugin<Project> {
         if (extension.java17) {
             java.setSourceCompatibility(JavaVersion.VERSION_17);
             java.setTargetCompatibility(JavaVersion.VERSION_17);
+        }
+
+        if (extension.java21) {
+            java.setSourceCompatibility(JavaVersion.VERSION_21);
+            java.setTargetCompatibility(JavaVersion.VERSION_21);
         }
 
     }
