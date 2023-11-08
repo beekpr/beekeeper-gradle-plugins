@@ -44,9 +44,9 @@ public class TestingPlugin implements Plugin<Project> {
 
     private void configureStandaloneJacoco(Project project) {
         project.getTasks().withType(JacocoReport.class, task -> {
-            task.getReports().getXml().setEnabled(true);
-            task.getReports().getCsv().setEnabled(true);
-            task.getReports().getHtml().setEnabled(true);
+            task.getReports().getXml().getRequired().set(true);
+            task.getReports().getCsv().getRequired().set(true);
+            task.getReports().getHtml().getRequired().set(true);
         });
     }
 
