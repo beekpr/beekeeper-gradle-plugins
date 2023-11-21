@@ -27,6 +27,7 @@ public class QuarkusDependencies {
             "org.zalando:problem",
             "org.zalando:jackson-datatype-problem",
             "io.beekeeper:quarkus-beekeeper-api-convention",
+            "io.quarkus:quarkus-hibernate-validator",
             "io.quarkus:quarkus-smallrye-openapi"
         );
 
