@@ -58,7 +58,9 @@ public class FormatterPlugin implements Plugin<Project> {
                 java.target("**/*.java");
                 java.removeUnusedImports();
                 java.trimTrailingWhitespace();
-                var formatConfig = formatOptions.useGoogleJavaFormat ? java.googleJavaFormat() : java.palantirJavaFormat();
+                var formatConfig = formatOptions.useGoogleJavaFormat
+                    ? java.googleJavaFormat()
+                    : java.palantirJavaFormat();
             });
         });
     }
