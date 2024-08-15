@@ -1,7 +1,6 @@
 plugins {
     id "com.gradle.plugin-publish" version "0.19.0" apply false
     id "io.beekeeper.gradle.plugin" version "0.9.22"
-    id 'maven-publish'
 }
 
 group = 'io.beekeeper.gradle'
@@ -16,7 +15,7 @@ subprojects {
         apply plugin: 'java-gradle-plugin'
         apply plugin: 'com.gradle.plugin-publish'
         // uncomment for publishing locally
-        apply plugin: 'maven-publish'
+        // apply plugin: 'maven-publish'
     }
 
     repositories {
@@ -27,7 +26,7 @@ subprojects {
         }
 
         // uncomment for publishing locally
-        mavenLocal()
+        // mavenLocal()
     }
 
     dependencies {
