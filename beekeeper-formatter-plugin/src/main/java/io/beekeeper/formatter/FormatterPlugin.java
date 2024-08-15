@@ -17,6 +17,8 @@ public class FormatterPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
+        project.getExtensions().create(FormatOptions.EXTENSION, FormatOptions.class);
+
         gradleVersionCheck(project);
 
         project.getPlugins().apply(SpotlessPlugin.class);
@@ -24,6 +26,12 @@ public class FormatterPlugin implements Plugin<Project> {
         applySpotlessJavaConfiguration(project);
         applySpotlessGroovyConfiguration(project);
         applySpotlessGradleConfiguration(project);
+    }
+
+    public static class FormatOptions {
+        static final String EXTENSION = "beekeeperCodeFormat";
+
+        boolean useGoogleJavaFormat;
     }
 
     // TODO: Move it to the base gradle plugin
@@ -36,6 +44,7 @@ public class FormatterPlugin implements Plugin<Project> {
     }
 
     private void applySpotlessJavaConfiguration(Project project) {
+        FormatOptions formatOptions = project.getExtensions().getByType(FormatOptions.class);
         SpotlessExtension extension = project.getExtensions().findByType(SpotlessExtension.class);
         if (extension == null) {
             throw new GradleException("Must have spotless plugin installed");
@@ -47,9 +56,9 @@ public class FormatterPlugin implements Plugin<Project> {
         project.getPluginManager().withPlugin(PLUGIN_JAVA, javaPlugin -> {
             extension.java(java -> {
                 java.target("**/*.java");
-                java.googleJavaFormat();
                 java.removeUnusedImports();
                 java.trimTrailingWhitespace();
+                var formatConfig = formatOptions.useGoogleJavaFormat ? java.googleJavaFormat() : java.palantirJavaFormat();
             });
         });
     }
