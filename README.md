@@ -101,6 +101,27 @@ After that you should run `./gradlew publishToMavenLocal` this will deploy plugi
 
 ## Changelog
 
+## 0.16.0
+Move `beekeeper-formatter-plugin` from Google format to [Palantir format](https://github.com/palantir/palantir-java-format) as voted in the Backend Guild.
+
+### Migration
+#### Migration in the project
+* Upgrade the plugin version to `0.16.0` or higher.
+* Run `./gradlew spotlessApply` to apply the new formatting rules.
+* Commit the changes with the message `BG-50: Migrate to Palantir Java Format`.
+* Add the commit hash to `.git-blame-ignore-revs` in the project root. Create the file if it doesn't exist.
+
+#### Migration in your IDE
+* Install the IntelliJ plugin as described [here](https://github.com/palantir/palantir-java-format?tab=readme-ov-file#intellij-plugin)
+
+### Avoiding the migration
+If you want to avoid the migration and continue to use the Google code format, you can add the following configuration to your `build.gradle`:
+```groovy
+beekeeperCodeFormat {
+     useGoogleJavaFormat = true
+}
+```
+
 ## 0.15.0
 Apply `quarkus-jacoco` dependency to Quarkus-based projects and configure it to build consolidated reports from both
 `@QuarkusTest`-annotated and unit tests.
