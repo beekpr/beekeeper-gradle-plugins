@@ -1,6 +1,6 @@
 dependencies {
     implementation 'org.owasp:dependency-check-gradle:8.4.3'
-    implementation 'org.cyclonedx:cyclonedx-gradle-plugin:1.8.1'
+    implementation 'org.cyclonedx:cyclonedx-gradle-plugin:2.3.0'
 }
 
 gradlePlugin {

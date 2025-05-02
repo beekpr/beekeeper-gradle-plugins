@@ -101,6 +101,9 @@ After that you should run `./gradlew publishToMavenLocal` this will deploy plugi
 
 ## Changelog
 
+## 0.16.1
+* Bump cycloneDX plugin to `2.1.0`
+
 ## 0.16.0
 Move `beekeeper-formatter-plugin` from Google format to [Palantir format](https://github.com/palantir/palantir-java-format) as voted in the Backend Guild.
 
